@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.sp
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.Genre
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
-import com.example.androidfinalproject.presentation.home.component.MovieCard
+import com.example.kinopoisk.presentation.home.component.MovieCard
 
 @Composable
 fun GenreSection(genre: Genre, navController: NavHostController) {
