@@ -1,5 +1,4 @@
-package com.example.androidfinalproject.domain.model
-
+package com.example.androidfinalproject.model
 
 data class Genre(
     val movies: List<Movie>,

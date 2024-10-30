@@ -1,6 +1,7 @@
-package com.example.androidfinalproject.domain.model
+package com.example.androidfinalproject.model
 
 import com.example.androidfinalproject.R
+
 
 data class Movie(
     val title: String,
