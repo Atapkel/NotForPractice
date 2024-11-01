@@ -1,5 +1,4 @@
-package com.example.androidfinalproject.presentation.search
-
+package com.example.androidfinalproject.presentation.searc
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
