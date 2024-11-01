@@ -2,7 +2,9 @@ package com.example.androidfinalproject.presentation.graph.bottomBarGraphs
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.androidfinalproject.presentation.genre.GenreScreen
 import com.example.androidfinalproject.presentation.movie_detail.DetailScreen
@@ -13,11 +15,25 @@ fun NavGraphBuilder.homeGraph (navController: NavHostController){
         composable(route = HomeRoutes.HOME_MAIN) {
             HomeScreen(navController)
         }
-        composable(route = HomeRoutes.HOME_DETAIL) {
-            DetailScreen()
+        composable(route = HomeRoutes.HOME_DETAIL+"/{id}",
+            arguments = listOf(
+                navArgument("id"){
+                    type = NavType.IntType
+                }
+            )
+        ) { entry ->
+            val id = entry.arguments?.getInt("id") ?: 0
+            DetailScreen(id)
         }
-        composable(route = HomeRoutes.HOME_SEE_ALL) {
-            GenreScreen()
+        composable(route = HomeRoutes.HOME_SEE_ALL+"/{type}",
+            arguments = listOf(
+                navArgument("type"){
+                    type = NavType.StringType
+                }
+            )
+        ) { entry ->
+            val type = entry.arguments?.getString("type") ?: ""
+            GenreScreen(type)
         }
 
     }

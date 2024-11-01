@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun DetailScreen() {
+fun DetailScreen(id: Int) {
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center) {
-        Text("DetailScreen", fontSize = 50.sp)
+        Text("DetailScreen $id", fontSize = 50.sp)
     }
 }

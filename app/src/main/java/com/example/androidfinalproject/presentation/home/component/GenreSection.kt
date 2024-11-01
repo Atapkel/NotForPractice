@@ -52,7 +52,7 @@ fun GenreSection(movies: List<Movie>, navController: NavHostController) {
                 fontSize = 14.sp,
                 color = Color(0xFF3D3BFF),
                 modifier = Modifier.clickable {
-                    navController.navigate(HomeRoutes.HOME_SEE_ALL)
+                    navController.navigate(HomeRoutes.HOME_SEE_ALL+"/${movies.get(0).type}")
                 }
             )
         }
@@ -64,7 +64,7 @@ fun GenreSection(movies: List<Movie>, navController: NavHostController) {
                     MovieCard(
                         movie = movie,
                         onClick = {
-                            navController.navigate(HomeRoutes.HOME_DETAIL)
+                            navController.navigate(HomeRoutes.HOME_DETAIL+"/${movie.kinopoiskId}")
                         }
                     )
                 }
@@ -86,7 +86,7 @@ fun GenreSection(movies: List<Movie>, navController: NavHostController) {
                                 tint = Color(0xFF3D3BFF),
                                 contentDescription = null,
                                 modifier = Modifier.clickable {
-                                    navController.navigate(HomeRoutes.HOME_SEE_ALL)
+                                    navController.navigate(HomeRoutes.HOME_SEE_ALL+"/${movies.get(0).type}")
                                 }
                             )
                         }

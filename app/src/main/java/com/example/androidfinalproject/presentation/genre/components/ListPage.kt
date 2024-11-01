@@ -29,11 +29,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHost
+import androidx.navigation.NavHostController
 import com.example.androidfinalproject.R
+import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
 
 
 @Composable
-fun ListPage(movies : List<Movie>) {
+fun ListPage(movies : List<Movie>, navController: NavHostController) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier
@@ -48,7 +51,7 @@ fun ListPage(movies : List<Movie>) {
         items(movies){
             movie ->
             MovieCard(movie = movie, onClick = {
-
+                navController.navigate(HomeRoutes.HOME_DETAIL+"/${movie.kinopoiskId}")
             })
         }
     }

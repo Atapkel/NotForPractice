@@ -29,11 +29,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.presentation.genre.components.ListPage
+import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
 
 @Composable
-fun ListScreen(movies: List<Movie>){
+fun ListScreen(movies: List<Movie>, navController: NavHostController){
     val m = movies.get(0)
     Column(
         modifier = Modifier.fillMaxSize()
@@ -47,7 +50,7 @@ fun ListScreen(movies: List<Movie>){
                 painter = painterResource(R.drawable.caret_left),
                 contentDescription = "",
                 modifier = Modifier.align(Alignment.CenterStart).clickable {
-
+                    navController.navigate(HomeRoutes.HOME_MAIN)
                 }
             )
 
@@ -66,7 +69,7 @@ fun ListScreen(movies: List<Movie>){
 
         }
         Spacer(Modifier.height(32.dp))
-        ListPage(movies)
+        ListPage(movies, navController)
     }
 }
 

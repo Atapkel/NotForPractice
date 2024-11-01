@@ -42,7 +42,7 @@ fun HomeScreen(
             Spacer(Modifier.height(47.dp))
         }
         items(state.types) { movies ->
-            GenreSection(movies = movies,navController = navController)
+            GenreSection(movies = movies, navController = navController)
         }
     }
 }
