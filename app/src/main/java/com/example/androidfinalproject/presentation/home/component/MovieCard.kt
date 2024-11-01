@@ -87,5 +87,6 @@ fun MovieCard(
             fontSize = 12.sp,
             fontFamily = FontFamily(Font(R.font.graphik_regular))
         )
+
     }
 }
