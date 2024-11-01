@@ -15,7 +15,7 @@ object MovieData {
         Movie("Близкие", "драма", 7.8, isSeen = false, imageId = R.drawable.onboard1),
         Movie("Легенда", "приключения", 8.5, isSeen = true, imageId = R.drawable.onboard1),
         Movie("Тайна", "ужасы", 6.5, isSeen = false, imageId = R.drawable.onboard1),
-        Movie("Супергерой", "экшн", 9.0, isSeen = true, imageId = R.drawable.onboard1),
+        Movie("Супергерой", "экшен", 9.0, isSeen = true, imageId = R.drawable.onboard1),
         Movie("Комедия", "комедия", 7.0, isSeen = true, imageId = R.drawable.onboard1),
         Movie("Мелодрама", "романтика", 6.9, isSeen = false, imageId = R.drawable.onboard1)
     )

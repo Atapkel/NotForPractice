@@ -12,7 +12,7 @@ import com.example.androidfinalproject.presentation.movie_detail.DetailScreen
 fun NavGraphBuilder.homeGraph (navController: NavHostController){
     navigation(route = BottomNavigationItem.Home.route, startDestination = HomeRoutes.HOME_MAIN){
         composable(route = HomeRoutes.HOME_MAIN) {
-            HomeScreen(GenreData.generes, navController)
+            HomeScreen(GenreData.genres, navController)
         }
         composable(route = HomeRoutes.HOME_DETAIL) {
             DetailScreen()

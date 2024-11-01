@@ -7,7 +7,7 @@ data class Genre(
 )
 
 object GenreData {
-    val generes = listOf(
+    val genres = listOf(
         Genre(movies = MovieData.movies,"Title1"),
         Genre(movies = MovieData.movies,"Title2"),
         Genre(movies = MovieData.movies,"Title3"),
