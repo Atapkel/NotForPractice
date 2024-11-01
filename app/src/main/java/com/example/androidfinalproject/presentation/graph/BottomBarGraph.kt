@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.BottomNavigationItem
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.homeGraph
 import com.example.androidfinalproject.presentation.profile.ProfileScreen
-import com.example.androidfinalproject.presentation.searc.SearchScreen
+import com.example.androidfinalproject.presentation.search.SearchScreen
 
 
 @Composable
