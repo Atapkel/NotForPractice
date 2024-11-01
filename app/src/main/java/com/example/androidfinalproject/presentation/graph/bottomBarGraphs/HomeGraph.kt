@@ -33,7 +33,7 @@ fun NavGraphBuilder.homeGraph (navController: NavHostController){
             )
         ) { entry ->
             val type = entry.arguments?.getString("type") ?: ""
-            GenreScreen(type)
+            GenreScreen(type,navController)
         }
 
     }
