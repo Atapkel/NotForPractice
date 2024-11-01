@@ -1,6 +1,7 @@
 package com.example.androidfinalproject.presentation.home.component
 
 import Movie
+import MovieCard
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 
@@ -30,7 +31,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
-import com.example.androidfinalproject.presentation.home.component.MovieCard
 
 @Composable
 fun GenreSection(movies: List<Movie>, navController: NavHostController) {
