@@ -21,7 +21,7 @@ import kotlinx.coroutines.delay
 
 
 @Composable
-fun LoadingScreen(onComplete : () -> Unit){
+fun LoadingScreen(){
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -45,10 +45,6 @@ fun LoadingScreen(onComplete : () -> Unit){
         //Spacer(modifier = Modifier.height(284.dp))
 
         LoadingIndicator()
-        LaunchedEffect(Unit) {
-            delay(2000L)
-            onComplete()
-        }
 
         //Spacer(modifier = Modifier.height(180.dp))
 

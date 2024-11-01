@@ -1,6 +1,5 @@
 package com.example.androidfinalproject.presentation.genre
 
-import Movie
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,24 +9,28 @@ import com.example.androidfinalproject.data.repository.Repository
 import kotlinx.coroutines.launch
 
 
-class GenreModelView(private val type: String) : ViewModel() {
+class GenreModelView(type: String) : ViewModel() {
     private val repository = Repository()
-    var state by mutableStateOf(State())
+    var state by mutableStateOf<GenreState>(GenreState.Initial)
+        private set
 
     init {
+        fetchMovies(type)
+    }
+
+    private fun fetchMovies(type: String) {
+        state = GenreState.Loading
         viewModelScope.launch {
-            val response = repository.getMovies(type)
-            if (response.isSuccessful) {
-                state = state.copy(
-                    types = response.body()?.items ?: emptyList()
-                )
-            } else {
-                state = state.copy(types = emptyList())
+            try {
+                val response = repository.getMovies(type)
+                if (response.isSuccessful) {
+                    state = GenreState.Success(response.body()?.items ?: emptyList())
+                } else {
+                    state = GenreState.Error("Failed to load movies: ${response.message()}")
+                }
+            } catch (e: Exception) {
+                state = GenreState.Error("An error occurred: ${e.localizedMessage}")
             }
         }
     }
 }
-
-data class State(
-    val types: List<Movie> = emptyList()
-)

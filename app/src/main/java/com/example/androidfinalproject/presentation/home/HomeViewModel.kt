@@ -9,24 +9,29 @@ import androidx.lifecycle.viewModelScope
 import com.example.androidfinalproject.data.repository.Repository
 import kotlinx.coroutines.launch
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel : ViewModel() {
     private val repository = Repository()
-    var state by mutableStateOf(ScreenState())
+    var state by mutableStateOf<HomeState>(HomeState.Initial)
+        private set
+
+    private val titles = listOf("TV_SHOW", "FILM", "TV_SERIES", "MINI_SERIES")
+
     init {
-        viewModelScope.launch {
-            val movies = state.title.map { type ->
-                val response = repository.getMovies(type)
-                response.body()?.items ?: emptyList()
-            }
-            state = state.copy(
-                types = movies
-            )
-        }
+        fetchMovies()
     }
 
+    private fun fetchMovies() {
+        state = HomeState.Loading
+        viewModelScope.launch {
+            try {
+                val moviesByType = titles.map { type ->
+                    val response = repository.getMovies(type)
+                    response.body()?.items ?: emptyList()
+                }
+                state = HomeState.Success(moviesByType)
+            } catch (e: Exception) {
+                state = HomeState.Error(e.localizedMessage ?: "Unknown error")
+            }
+        }
+    }
 }
-
-data class ScreenState(
-    val types: List<List<Movie>> = emptyList(),
-    val title: List<String> = listOf("TV_SHOW","FILM","TV_SERIES","MINI_SERIES")
-)

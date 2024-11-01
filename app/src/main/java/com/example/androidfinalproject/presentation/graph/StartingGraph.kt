@@ -11,17 +11,11 @@ fun NavGraphBuilder.startingGraph(navController: NavController) {
 
     navigation(route = Routes.Starting.route, startDestination = StartRoutes.ONBOARD) {
         composable(route = StartRoutes.ONBOARD) {
-            OnBoardingScreen(onClick = { navController.navigate(StartRoutes.LOAD) })
-        }
-        composable(route = StartRoutes.LOAD) {
-            LoadingScreen(onComplete = {
-                navController.navigate(Routes.BottomBar.route)
-            })
+            OnBoardingScreen(onClick = { navController.navigate(Routes.BottomBar.route) })
         }
     }
 }
 
 object StartRoutes {
     const val ONBOARD = "onboard_screen"
-    const val LOAD = "load_screen"
 }
