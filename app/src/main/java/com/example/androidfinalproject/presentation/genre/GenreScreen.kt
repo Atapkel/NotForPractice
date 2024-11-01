@@ -36,7 +36,7 @@ fun GenreScreen(type: String, navController: NavHostController) {
             }
         }
         is GenreState.Success -> {
-            ListPage(state.data,navController)
+            ListScreen(state.data,navController)
         }
         is GenreState.Error -> {
             Column(
