@@ -29,12 +29,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androidfinalproject.R
-import com.example.androidfinalproject.domain.model.Genre
-import com.example.androidfinalproject.domain.model.GenreData
 
 
 @Composable
-fun ListPage(genre: Genre) {
+fun ListPage(movies) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {

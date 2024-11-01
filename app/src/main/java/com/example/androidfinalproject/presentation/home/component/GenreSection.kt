@@ -1,5 +1,7 @@
+package com.example.androidfinalproject.presentation.home.component
 
-
+import Movie
+import MovieCard
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 
@@ -28,18 +30,17 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 import com.example.androidfinalproject.R
-import com.example.androidfinalproject.domain.model.Genre
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
 
 @Composable
-fun GenreSection(genre: Genre, navController: NavHostController) {
+fun GenreSection(movies: List<Movie>, navController: NavHostController) {
     Column {
         Row(
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = genre.genreTitle,
+                text = movies.get(0).type,
                 fontFamily = FontFamily(Font(R.font.graphik_medium)),
                 fontSize = 18.sp,
                 color = Color(0xFF272727)
@@ -59,7 +60,7 @@ fun GenreSection(genre: Genre, navController: NavHostController) {
         Spacer(Modifier.height(24.dp))
         Row {
             LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                items(genre.movies) { movie ->
+                items(movies) { movie ->
                     MovieCard(
                         movie = movie,
                         onClick = {
