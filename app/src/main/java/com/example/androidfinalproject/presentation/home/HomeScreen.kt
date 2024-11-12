@@ -27,8 +27,9 @@ import com.example.androidfinalproject.presentation.home.component.GenreSection
 import com.example.androidfinalproject.presentation.loadingScreen.LoadingScreen
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(path: (String) -> Unit) {
     val viewModel: HomeViewModel = remember { HomeViewModel() }
+
     when (val state = viewModel.state) {
         is HomeState.Initial -> {
         }
@@ -52,7 +53,7 @@ fun HomeScreen(navController: NavHostController) {
                     Spacer(Modifier.height(47.dp))
                 }
                 items(state.data) { movies ->
-                    GenreSection(movies = movies, navController = navController)
+                    GenreSection(movies = movies, path)
                 }
             }
         }

@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
     private val repository = Repository()
+
     var state by mutableStateOf<HomeState>(HomeState.Initial)
         private set
 

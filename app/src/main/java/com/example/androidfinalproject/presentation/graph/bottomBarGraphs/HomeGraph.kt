@@ -13,7 +13,7 @@ import com.example.androidfinalproject.presentation.home.HomeScreen
 fun NavGraphBuilder.homeGraph (navController: NavHostController){
     navigation(route = BottomNavigationItem.Home.route, startDestination = HomeRoutes.HOME_MAIN){
         composable(route = HomeRoutes.HOME_MAIN) {
-            HomeScreen(navController)
+            HomeScreen(path = {route -> navController.navigate(route)})
         }
         composable(route = HomeRoutes.HOME_DETAIL+"/{id}",
             arguments = listOf(
