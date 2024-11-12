@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.ActorByFilm
+import com.example.androidfinalproject.presentation.movie_detail.component.DetailScreenOfMovie
 
 @Composable
 fun DetailScreen(id: Int) {
@@ -50,8 +51,9 @@ fun DetailScreen(id: Int) {
                     }
                 }
                 is ActorsByFilmIdState.Success ->{
-                    var actors: List<ActorByFilm> = stateOfActors.actors;
+                    val actors: List<ActorByFilm> = stateOfActors.actors;
                     val movie: Movie = state.movies;
+                    DetailScreenOfMovie(actors = actors, movie = movie)
                 }
                 is ActorsByFilmIdState.Error -> {
                     Column(

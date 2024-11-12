@@ -1,4 +1,8 @@
 package com.example.androidfinalproject.presentation.actor
 
-class ActorScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun ActorScreen(id: Int) {
+
 }
