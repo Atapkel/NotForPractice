@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.ActorByFilm
+import com.example.androidfinalproject.presentation.actor.ActorScreen
 import com.example.androidfinalproject.presentation.movie_detail.component.DetailScreenOfMovie
 
 @Composable
