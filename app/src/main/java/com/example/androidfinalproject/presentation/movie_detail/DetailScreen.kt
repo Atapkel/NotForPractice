@@ -1,5 +1,6 @@
 package com.example.androidfinalproject.presentation.movie_detail
 
+import Movie
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,15 +17,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androidfinalproject.R
+import com.example.androidfinalproject.domain.model.ActorByFilm
 
 @Composable
 fun DetailScreen(id: Int) {
     val viewModel: DetailScreenViewModel = remember { DetailScreenViewModel(id) }
-    val state = viewModel.state
 
-    when (val state = viewModel.state) {
+    when (val state = viewModel.stateOfMovieDetail) {
         is MovieDetailState.Initial -> {
         }
+
         is MovieDetailState.Loading -> {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -34,15 +36,43 @@ fun DetailScreen(id: Int) {
                 CircularProgressIndicator(color = Color(0xFF3D3BFF))
             }
         }
-        is MovieDetailState.Success -> {
 
-            Column(modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center) {
-                Text("DetailScreen ${state.data}", fontSize = 50.sp)
+        is MovieDetailState.Success -> {
+            when (val stateOfActors = viewModel.stateOfActorsByFilm) {
+                is ActorsByFilmIdState.Initial -> {}
+                is ActorsByFilmIdState.Loading -> {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator(color = Color(0xFF3D3BFF))
+                    }
+                }
+                is ActorsByFilmIdState.Success ->{
+                    var actors: List<ActorByFilm> = stateOfActors.actors;
+                    val movie: Movie = state.movies;
+                }
+                is ActorsByFilmIdState.Error -> {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.eye_icon),
+                            contentDescription = "Error",
+                            modifier = Modifier.size(25.dp)
+                        )
+                        Text(text = stateOfActors.message, color = Color.Red)
+                    }
+                }
             }
 
+
+
         }
+
         is MovieDetailState.Error -> {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -58,10 +88,6 @@ fun DetailScreen(id: Int) {
             }
         }
     }
-
-
-
-
 
 
 }

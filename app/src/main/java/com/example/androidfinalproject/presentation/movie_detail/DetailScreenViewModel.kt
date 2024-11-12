@@ -7,33 +7,52 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidfinalproject.data.repository.Repository
-import com.example.androidfinalproject.presentation.genre.GenreState
 import kotlinx.coroutines.launch
 
 class DetailScreenViewModel(id: Int):ViewModel() {
 
     private val repository = Repository()
-    var state by mutableStateOf<MovieDetailState>(MovieDetailState.Initial)
+    var stateOfMovieDetail by mutableStateOf<MovieDetailState>(MovieDetailState.Initial)
         private set
-
+    var stateOfActorsByFilm by mutableStateOf<ActorsByFilmIdState>(ActorsByFilmIdState.Initial)
+        private set
     init {
         fetchMovieDetail(id)
+        fetchMovieActors(id)
     }
 
     private fun fetchMovieDetail(id: Int) {
-        state = MovieDetailState.Loading
+        stateOfMovieDetail = MovieDetailState.Loading
         viewModelScope.launch {
             try {
                 val response = repository.getFilmDetailById(id)
                 if (response.isSuccessful) {
-                    state = MovieDetailState.Success(response.body() ?: Movie())
+                    stateOfMovieDetail = MovieDetailState.Success(response.body() ?: Movie())
                 } else {
-                    state = MovieDetailState.Error("Failed to load movies: ${response.message()}")
+                    stateOfMovieDetail = MovieDetailState.Error("Failed to load movies: ${response.message()}")
                 }
             } catch (e: Exception) {
-                state = MovieDetailState.Error("An error occurred: ${e.localizedMessage}")
+                stateOfMovieDetail = MovieDetailState.Error("An error occurred when load movies: ${e.localizedMessage}")
             }
         }
     }
+
+    private fun fetchMovieActors(id: Int) {
+        stateOfActorsByFilm = ActorsByFilmIdState.Loading
+        viewModelScope.launch {
+            try {
+                val response = repository.getFilmActors(id)
+                if (response.isSuccessful) {
+                    stateOfActorsByFilm = ActorsByFilmIdState.Success(response.body() ?: emptyList())
+                } else {
+                    stateOfActorsByFilm = ActorsByFilmIdState.Error("Failed to load actors: ${response.message()}")
+                }
+            } catch (e: Exception) {
+                stateOfActorsByFilm = ActorsByFilmIdState.Error("An error occurred when Actors loaded: ${e.localizedMessage}")
+            }
+        }
+    }
+
+
 
 }
