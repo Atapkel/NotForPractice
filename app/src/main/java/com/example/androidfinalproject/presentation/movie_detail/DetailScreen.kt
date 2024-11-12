@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.ActorByFilm
+import com.example.androidfinalproject.domain.model.ImageOfFilm
 import com.example.androidfinalproject.presentation.actor.ActorScreen
 import com.example.androidfinalproject.presentation.movie_detail.component.DetailScreenOfMovie
 
@@ -52,9 +53,41 @@ fun DetailScreen(id: Int) {
                     }
                 }
                 is ActorsByFilmIdState.Success ->{
-                    val actors: List<ActorByFilm> = stateOfActors.actors;
-                    val movie: Movie = state.movies;
-                    DetailScreenOfMovie(actors = actors, movie = movie)
+
+                    when (val stateOfImages = viewModel.stateOfImagesByFilm) {
+                        is ImageState.Initial -> {}
+                        is ImageState.Loading -> {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                CircularProgressIndicator(color = Color(0xFF3D3BFF))
+                            }
+                        }
+                        is ImageState.Success ->{
+                            val actors: List<ActorByFilm> = stateOfActors.actors;
+                            val movie: Movie = state.movies;
+                            val images: List<ImageOfFilm> = stateOfImages.images;
+                            DetailScreenOfMovie(actors = actors, movie = movie, images = images)
+                        }
+                        is ImageState.Error -> {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Icon(
+                                    painter = painterResource(R.drawable.eye_icon),
+                                    contentDescription = "Error",
+                                    modifier = Modifier.size(25.dp)
+                                )
+                                Text(text = stateOfImages.message, color = Color.Red)
+                            }
+                        }
+                    }
+
+
                 }
                 is ActorsByFilmIdState.Error -> {
                     Column(

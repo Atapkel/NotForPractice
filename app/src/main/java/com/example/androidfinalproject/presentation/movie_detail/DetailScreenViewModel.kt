@@ -16,9 +16,12 @@ class DetailScreenViewModel(id: Int):ViewModel() {
         private set
     var stateOfActorsByFilm by mutableStateOf<ActorsByFilmIdState>(ActorsByFilmIdState.Initial)
         private set
+    var stateOfImagesByFilm by mutableStateOf<ImageState>(ImageState.Initial)
+        private set
     init {
         fetchMovieDetail(id)
         fetchMovieActors(id)
+        fetchMovieImages(id)
     }
 
     private fun fetchMovieDetail(id: Int) {
@@ -53,6 +56,21 @@ class DetailScreenViewModel(id: Int):ViewModel() {
         }
     }
 
+    private fun fetchMovieImages(id: Int) {
+        stateOfImagesByFilm = ImageState.Loading
+        viewModelScope.launch {
+            try {
+                val response = repository.getFilmImagesById(id)
+                if (response.isSuccessful) {
+                    stateOfImagesByFilm = ImageState.Success(response.body()?.items ?: emptyList())
+                } else {
+                    stateOfImagesByFilm = ImageState.Error("Failed to load actors: ${response.message()}")
+                }
+            } catch (e: Exception) {
+                stateOfImagesByFilm = ImageState.Error("An error occurred when Actors loaded: ${e.localizedMessage}")
+            }
+        }
+    }
 
 
 }

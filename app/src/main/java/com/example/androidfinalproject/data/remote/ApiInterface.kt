@@ -4,6 +4,7 @@ import Movie
 import MovieResponse
 import com.example.androidfinalproject.domain.model.Actor
 import com.example.androidfinalproject.domain.model.ActorByFilm
+import com.example.androidfinalproject.domain.model.ImagesOfFilm
 import com.example.androidfinalproject.util.Constants.TOKEN
 import retrofit2.Response
 import retrofit2.http.GET
@@ -36,5 +37,11 @@ interface ApiInterface {
         @Query("filmId") filmId: Int,
         @Header("X-API-KEY") apiKey: String = TOKEN
     ): Response<List<ActorByFilm>>
+
+    @GET("/api/v2.2/films/{id}/images")
+    suspend fun getFilmImagesById(
+        @Path("id") id: Int,
+        @Header("X-API-KEY") apiKey: String = TOKEN
+    ): Response<ImagesOfFilm>
 
 }
