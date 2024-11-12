@@ -36,7 +36,7 @@ import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRo
 
 
 @Composable
-fun ListPage(movies : List<Movie>, navController: NavHostController) {
+fun ListPage(movies : List<Movie>, path: (String) -> Unit) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier
@@ -51,7 +51,7 @@ fun ListPage(movies : List<Movie>, navController: NavHostController) {
         items(movies){
             movie ->
             MovieCard(movie = movie, onClick = {
-                navController.navigate(HomeRoutes.HOME_DETAIL+"/${movie.kinopoiskId}")
+                path(HomeRoutes.HOME_DETAIL+"/${movie.kinopoiskId}")
             })
         }
     }

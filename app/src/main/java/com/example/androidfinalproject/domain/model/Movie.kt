@@ -11,7 +11,9 @@ data class Movie(
     val year: Int = 0,
     val type: String = "",
     val posterUrl: String = "",
-    val posterUrlPreview: String = ""
+    val posterUrlPreview: String = "",
+    val filmLength: Int? = 0,
+    val ratingAgeLimits: String? = null
 )
 
 data class Country(

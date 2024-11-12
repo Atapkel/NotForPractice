@@ -21,11 +21,12 @@ import com.example.androidfinalproject.R
 import com.example.androidfinalproject.presentation.genre.components.ListPage
 
 @Composable
-fun GenreScreen(type: String, navController: NavHostController) {
+fun GenreScreen(type: String, path: (String) -> Unit) {
     val viewModel: GenreModelView = remember { GenreModelView(type) }
     when (val state = viewModel.state) {
         is GenreState.Initial -> {
         }
+
         is GenreState.Loading -> {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -35,9 +36,11 @@ fun GenreScreen(type: String, navController: NavHostController) {
                 CircularProgressIndicator(color = Color(0xFF3D3BFF))
             }
         }
+
         is GenreState.Success -> {
-            ListScreen(state.data,navController)
+            ListScreen(state.data, path)
         }
+
         is GenreState.Error -> {
             Column(
                 modifier = Modifier.fillMaxSize(),

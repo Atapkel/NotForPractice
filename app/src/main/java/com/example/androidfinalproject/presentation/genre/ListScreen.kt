@@ -36,7 +36,7 @@ import com.example.androidfinalproject.presentation.genre.components.ListPage
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
 
 @Composable
-fun ListScreen(movies: List<Movie>, navController: NavHostController){
+fun ListScreen(movies: List<Movie>, path: (String) -> Unit){
     val m = movies.get(0)
     Column(
         modifier = Modifier.fillMaxSize()
@@ -50,7 +50,7 @@ fun ListScreen(movies: List<Movie>, navController: NavHostController){
                 painter = painterResource(R.drawable.caret_left),
                 contentDescription = "",
                 modifier = Modifier.align(Alignment.CenterStart).clickable {
-                    navController.navigate(HomeRoutes.HOME_MAIN)
+                    path(HomeRoutes.HOME_MAIN)
                 }
             )
 
@@ -69,7 +69,7 @@ fun ListScreen(movies: List<Movie>, navController: NavHostController){
 
         }
         Spacer(Modifier.height(32.dp))
-        ListPage(movies, navController)
+        ListPage(movies, path)
     }
 }
 

@@ -23,7 +23,7 @@ fun NavGraphBuilder.homeGraph (navController: NavHostController){
             )
         ) { entry ->
             val id = entry.arguments?.getInt("id") ?: 0
-            DetailScreen(id)
+            DetailScreen(id, path = {route -> navController.navigate(route)})
         }
         composable(route = HomeRoutes.HOME_SEE_ALL+"/{type}",
             arguments = listOf(
@@ -33,7 +33,7 @@ fun NavGraphBuilder.homeGraph (navController: NavHostController){
             )
         ) { entry ->
             val type = entry.arguments?.getString("type") ?: ""
-            GenreScreen(type,navController)
+            GenreScreen(type,path = {route -> navController.navigate(route)})
         }
 
     }
