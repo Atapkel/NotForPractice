@@ -2,12 +2,13 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+
 }
 
 android {
     namespace = "com.example.androidfinalproject"
     compileSdk = 34
-
     defaultConfig {
         applicationId = "com.example.androidfinalproject"
         minSdk = 24
@@ -50,6 +51,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.support.annotations)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -59,14 +61,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.androidx.navigation.compose)
-
     // retrofit
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     //coil
-    implementation ("io.coil-kt:coil-compose:2.4.0")
+
+    implementation (libs.coil.compose)
     implementation ("com.google.accompanist:accompanist-coil:0.10.0")
 
     // viewModel

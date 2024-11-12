@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.androidfinalproject.R
 
 @Composable
@@ -35,12 +34,7 @@ fun DetailScreen(id: Int) {
             }
         }
         is MovieDetailState.Success -> {
-
-            Column(modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center) {
-                Text("DetailScreen ${state.data}", fontSize = 50.sp)
-            }
+            DetailPage(state.data)
 
         }
         is MovieDetailState.Error -> {
