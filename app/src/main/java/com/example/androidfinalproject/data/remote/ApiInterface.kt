@@ -3,6 +3,7 @@ package com.example.androidfinalproject.data.remote
 import Movie
 import MovieResponse
 import com.example.androidfinalproject.domain.model.Actor
+import com.example.androidfinalproject.domain.model.ActorByFilm
 import com.example.androidfinalproject.util.Constants.TOKEN
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,7 +14,7 @@ import retrofit2.http.Query
 interface ApiInterface {
     @GET("/api/v2.2/films")
     suspend fun getMovies(
-        @Query("type")type: String = "FILM",
+        @Query("type") type: String = "FILM",
         @Header("X-API-KEY") apiKey: String = TOKEN
     ): Response<MovieResponse>
 
@@ -28,4 +29,12 @@ interface ApiInterface {
         @Path("id") id: Int,
         @Header("X-API-KEY") apiKey: String = TOKEN
     ): Response<Movie>
+
+
+    @GET("/api/v1/staff")
+    suspend fun getFilmActors(
+        @Query("filmId") filmId: Int,
+        @Header("X-API-KEY") apiKey: String = TOKEN
+    ): Response<List<ActorByFilm>>
+
 }

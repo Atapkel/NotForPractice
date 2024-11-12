@@ -11,7 +11,14 @@ data class Movie(
     val year: Int = 0,
     val type: String = "",
     val posterUrl: String = "",
-    val posterUrlPreview: String = ""
+    val posterUrlPreview: String = "",
+    val filmLength: Int = 0,
+    val slogan: String = "",
+    val description: String = "",
+    val shortDescription: String = "",
+    val editorAnnotation: String = "",
+    val ratingAgeLimits: String = ""
+
 )
 
 data class Country(

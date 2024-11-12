@@ -65,6 +65,7 @@ fun GenreSection(movies: List<Movie>, path: (String) -> Unit) {
                         movie = movie,
                         onClick = {
                             path(HomeRoutes.HOME_DETAIL+"/${movie.kinopoiskId}")
+
                         }
                     )
                 }
