@@ -36,13 +36,13 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.ActorByFilm
-import com.example.androidfinalproject.domain.model.FilmImage
+import com.example.androidfinalproject.domain.model.ImageOfFilm
+
 import com.example.androidfinalproject.domain.model.SimilarFilm
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
 
@@ -51,9 +51,9 @@ import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRo
 fun DetailScreenOfMovie(
     stuffs: List<ActorByFilm>,
     movie: Movie,
-    images: List<FilmImage>,
+    images: List<ImageOfFilm>,
     similar: List<SimilarFilm>,
-    navController: NavHostController
+    path: (String) -> Unit
 ) {
     val gradient = Brush.verticalGradient(
         colors = listOf(
@@ -86,7 +86,7 @@ fun DetailScreenOfMovie(
                     painter = painterResource(R.drawable.caret_left),
                     modifier = Modifier
                         .clickable {
-                            navController.navigate(HomeRoutes.HOME_MAIN)
+                            path(HomeRoutes.HOME_MAIN)
                         }
                         .padding(horizontal = 30.dp, vertical = 20.dp))
                 Column(
@@ -222,14 +222,14 @@ fun DetailScreenOfMovie(
                 StuffLists(actors, "В фильме снимались")
                 StuffLists(directors, "Над фильмом работали")
                 ImageGallery(images)
-                SimilarFilms(similar, navController)
+                SimilarFilms(similar, path)
             }
         }
     }
 }
 
 @Composable
-fun ImageGallery(images: List<FilmImage>) {
+fun ImageGallery(images: List<ImageOfFilm>) {
     if (images.size != 0) {
         Column(
             Modifier
@@ -288,7 +288,7 @@ fun ImageGallery(images: List<FilmImage>) {
 
 
 @Composable
-fun SimilarFilms(similar: List<SimilarFilm>,navController: NavHostController) {
+fun SimilarFilms(similar: List<SimilarFilm>, path: (String) -> Unit) {
     if (similar.size != 0) {
         Column {
             Row(
@@ -336,7 +336,7 @@ fun SimilarFilms(similar: List<SimilarFilm>,navController: NavHostController) {
             ) {
                 items(similar) { similarFilm ->
                     SimilarCard(similarFilm,onClick = {
-                        navController.navigate(HomeRoutes.HOME_DETAIL+"/${similarFilm.filmId}")
+                        path(HomeRoutes.HOME_DETAIL+"/${similarFilm.filmId}")
                     })
                 }
             }

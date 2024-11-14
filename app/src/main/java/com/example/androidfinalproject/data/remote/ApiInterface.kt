@@ -4,9 +4,7 @@ import Movie
 import MovieResponse
 import com.example.androidfinalproject.domain.model.Actor
 import com.example.androidfinalproject.domain.model.ActorByFilm
-import com.example.androidfinalproject.domain.model.FilmImage
-import com.example.androidfinalproject.domain.model.FilmImagesResponse
-import com.example.androidfinalproject.domain.model.SimilarFilm
+import com.example.androidfinalproject.domain.model.ImagesOfFilm
 import com.example.androidfinalproject.domain.model.SimilarFilmsResponse
 import com.example.androidfinalproject.util.Constants.TOKEN
 import retrofit2.Response
@@ -34,6 +32,7 @@ interface ApiInterface {
         @Header("X-API-KEY") apiKey: String = TOKEN
     ): Response<Movie>
 
+
     @GET("/api/v1/staff")
     suspend fun getFilmActors(
         @Query("filmId") filmId: Int,
@@ -41,15 +40,14 @@ interface ApiInterface {
     ): Response<List<ActorByFilm>>
 
     @GET("/api/v2.2/films/{id}/images")
-    suspend fun getFilmImages(
+    suspend fun getFilmImagesById(
         @Path("id") id: Int,
         @Header("X-API-KEY") apiKey: String = TOKEN
-    ): Response<FilmImagesResponse>
+    ): Response<ImagesOfFilm>
 
     @GET("/api/v2.2/films/{id}/similars")
-    suspend fun getSimilarFilmById(
+    suspend fun getSimilarFilmsById(
         @Path("id") id: Int,
         @Header("X-API-KEY") apiKey: String = TOKEN
     ): Response<SimilarFilmsResponse>
-
 }

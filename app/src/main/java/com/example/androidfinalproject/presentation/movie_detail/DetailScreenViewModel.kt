@@ -8,7 +8,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidfinalproject.data.repository.Repository
-import com.example.androidfinalproject.domain.model.FilmImage
 import kotlinx.coroutines.launch
 
 class DetailScreenViewModel(id: Int):ViewModel() {
