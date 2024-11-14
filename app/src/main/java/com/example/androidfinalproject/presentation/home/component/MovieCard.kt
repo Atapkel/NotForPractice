@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
@@ -44,7 +45,9 @@ fun MovieCard(
         ) {
             AsyncImage(
                 model = movie.posterUrl,
-                contentDescription = null)
+                contentScale = ContentScale.Crop,
+                contentDescription = ""
+            )
 
             Box(
                 Modifier

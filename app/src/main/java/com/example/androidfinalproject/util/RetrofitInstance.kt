@@ -2,6 +2,8 @@ package com.example.androidfinalproject.util
 
 import com.example.androidfinalproject.data.remote.ApiInterface
 import com.example.androidfinalproject.util.Constants.BASE_URL
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

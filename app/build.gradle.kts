@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.support.annotations)
+    implementation(libs.androidx.ui.test.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -69,7 +70,7 @@ dependencies {
     //coil
 
     implementation (libs.coil.compose)
-    implementation ("com.google.accompanist:accompanist-coil:0.10.0")
+    implementation ("com.google.accompanist:accompanist-coil:0.15.0")
 
     // viewModel
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")

@@ -23,7 +23,7 @@ fun NavGraphBuilder.homeGraph (navController: NavHostController){
             )
         ) { entry ->
             val id = entry.arguments?.getInt("id") ?: 0
-            DetailScreen(id)
+            DetailScreen(id,navController)
         }
         composable(route = HomeRoutes.HOME_SEE_ALL+"/{type}",
             arguments = listOf(

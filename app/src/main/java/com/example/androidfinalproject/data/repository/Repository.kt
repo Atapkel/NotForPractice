@@ -4,6 +4,10 @@ import Movie
 import MovieResponse
 import com.example.androidfinalproject.domain.model.Actor
 import com.example.androidfinalproject.domain.model.ActorByFilm
+import com.example.androidfinalproject.domain.model.FilmImage
+import com.example.androidfinalproject.domain.model.FilmImagesResponse
+import com.example.androidfinalproject.domain.model.SimilarFilm
+import com.example.androidfinalproject.domain.model.SimilarFilmsResponse
 import com.example.androidfinalproject.util.RetrofitInstance
 import retrofit2.Response
 
@@ -22,5 +26,13 @@ class Repository {
 
     suspend fun getActorDetailById(id: Int): Response<Actor> {
         return RetrofitInstance.api.getActorDetailById(id)
+    }
+
+    suspend fun getSimilarFilmsById(id: Int): Response<SimilarFilmsResponse> {
+        return RetrofitInstance.api.getSimilarFilmById(id)
+    }
+
+    suspend fun getFilmImages(id: Int): Response<FilmImagesResponse> {
+        return RetrofitInstance.api.getFilmImages(id)
     }
 }
