@@ -36,7 +36,7 @@ fun ActorScreen(id: Int) {
         }
 
         is ActorState.Success -> {
-            ActorScreenDetails(state.actor)
+            ActorScreenDetails(state.actor,state.filmCount,state.movies)
         }
         is ActorState.Error -> {
             Column(

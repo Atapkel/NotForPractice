@@ -1,5 +1,6 @@
 package com.example.androidfinalproject.presentation.actor.component
 
+import Movie
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,14 +13,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -33,7 +40,7 @@ import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.Actor
 
 @Composable
-fun ActorScreenDetails(actor: Actor) {
+fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>) {
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -45,7 +52,6 @@ fun ActorScreenDetails(actor: Actor) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
-                .width(360.dp)
                 .height(56.dp),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically,
@@ -58,10 +64,10 @@ fun ActorScreenDetails(actor: Actor) {
 
         }
         Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.Start),
+            verticalAlignment = Alignment.Top,
             modifier = Modifier
-                .width(308.dp)
-                .height(201.dp)
+                .fillMaxWidth()
         ) {
             Box (
                 modifier = Modifier
@@ -95,8 +101,15 @@ fun ActorScreenDetails(actor: Actor) {
                         color = Color(0xFF838390),
                     )
                 )
+
             }
         }
+        Spacer(modifier = Modifier.height(40.dp))
+        ListRow("Лучшее","Все",false,filmCount)
+        Spacer(modifier = Modifier.height(24.dp))
+        FilmRow(movies)
+        Spacer(modifier = Modifier.height(36.dp))
+        ListRow("Фильмография","К списку",true,filmCount)
     }
 }
 
@@ -135,6 +148,8 @@ fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int){
         Row(
             horizontalArrangement = Arrangement.spacedBy(2.dp),
             verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .clickable {  }
         ) {
             Text(
                 text = text,
@@ -146,6 +161,55 @@ fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int){
                     textAlign = TextAlign.Center,
                 )
             )
+            Image(
+                painter = painterResource(R.drawable.caret_left),
+                contentDescription = "",
+                modifier = Modifier
+                    .graphicsLayer(rotationZ = 180f)
+                    .size(18.dp),
+                colorFilter = ColorFilter.tint(Color(0xFF3D3BFF))
+            )
+        }
+    }
+}
+
+@Composable
+fun FilmRow(movies: List<Movie>) {
+    Row {
+        LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            items(movies) { movie ->
+                ActorMovieCard(
+                    movie = movie
+                )
+            }
+            item {
+                Column(
+                    modifier = Modifier
+                        .width(111.dp)
+                        .height(194.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Box(
+                        Modifier
+                            .clip(RoundedCornerShape(50))
+                            .size(32.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.arrow_right),
+                            tint = Color(0xFF3D3BFF),
+                            contentDescription = null
+                        )
+                    }
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        "Показать все",
+                        fontSize = 12.sp,
+                        fontFamily = FontFamily(Font(R.font.graphik_regular)),
+                        color = Color(0xFF272727)
+                    )
+                }
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.androidfinalproject.presentation.actor
 
+import Movie
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidfinalproject.data.repository.Repository
 import com.example.androidfinalproject.domain.model.Actor
+import com.example.androidfinalproject.domain.model.Film
 import kotlinx.coroutines.launch
 
 class ActorScreenViewModel(id: Int): ViewModel() {
@@ -24,7 +26,15 @@ class ActorScreenViewModel(id: Int): ViewModel() {
             try {
                 val response = repository.getActorDetailById(id)
                 if (response.isSuccessful) {
-                    state = ActorState.Success(response.body() ?: Actor())
+                    val actor = response.body() ?: Actor()
+                    val generalFilmIds = actor.films.filter { it.general }.map { it.filmId }
+                    val filmCount = actor.films.size
+                    val movies = fetchMovies(generalFilmIds)
+                    state = ActorState.Success(
+                        actor = actor,
+                        filmCount = filmCount,
+                        movies = movies
+                    )
                 } else {
                     state = ActorState.Error("Failed to load actor: ${response.message()}")
                 }
@@ -32,5 +42,14 @@ class ActorScreenViewModel(id: Int): ViewModel() {
                 state = ActorState.Error("An error occurred when load actor: ${e.localizedMessage}")
             }
         }
+    }
+    private suspend fun fetchMovies(filmIds: List<Int>): List<Movie> {
+        val movies = mutableListOf<Movie>()
+        for (filmId in filmIds) {
+            val response = repository.getFilmDetailById(filmId)
+            val movie = response.body() ?: Movie()
+            movies.add(movie)
+        }
+        return movies
     }
 }
