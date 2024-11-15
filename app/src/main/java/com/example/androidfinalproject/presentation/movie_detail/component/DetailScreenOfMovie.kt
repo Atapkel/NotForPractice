@@ -70,8 +70,8 @@ fun DetailScreenOfMovie(
                     .fillMaxWidth()
             ) {
 
-                Image(
-                    painter = rememberImagePainter(movie.posterUrl),
+                AsyncImage(
+                    model = movie.posterUrl,
                     contentDescription = "",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -385,7 +385,6 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String,chunkSize:Int) {
         }
     }
 }
-
 
 @Composable
 fun RotatedCaret() {
