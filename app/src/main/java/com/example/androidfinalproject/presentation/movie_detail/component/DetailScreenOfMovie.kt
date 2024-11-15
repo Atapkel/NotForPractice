@@ -36,15 +36,22 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.ActorByFilm
 import com.example.androidfinalproject.domain.model.ImageOfFilm
-
 import com.example.androidfinalproject.domain.model.SimilarFilm
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
+
+
+private val gradient = Brush.verticalGradient(
+    colors = listOf(
+        Color(0x001B1B1B),
+        Color(0xFF1B1B1B),
+    )
+)
+
 
 
 @Composable
@@ -55,12 +62,6 @@ fun DetailScreenOfMovie(
     similar: List<SimilarFilm>,
     path: (String) -> Unit
 ) {
-    val gradient = Brush.verticalGradient(
-        colors = listOf(
-            Color(0x001B1B1B),
-            Color(0xFF1B1B1B),
-        )
-    )
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             Box(
@@ -221,61 +222,62 @@ fun DetailScreenOfMovie(
                 }
                 StuffLists(actors, "В фильме снимались")
                 StuffLists(directors, "Над фильмом работали")
-                ImageGallery(images)
+                ImageGallery(images,path,movie.kinopoiskId)
                 SimilarFilms(similar, path)
             }
         }
     }
 }
 
+
+
 @Composable
-fun ImageGallery(images: List<ImageOfFilm>) {
-    if (images.size != 0) {
+fun Header(topic: String, list: List<Any>,onClick: () -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = topic,
+            style = TextStyle(
+                fontSize = 20.sp,
+                fontFamily = FontFamily(Font(R.font.graphik_medium)),
+                fontWeight = FontWeight(600),
+                color = Color(0xFF272727),
+            )
+        )
+        Row(
+            modifier = Modifier.clickable {
+                onClick()
+            },
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = list.size.toString(), style = TextStyle(
+                fontSize = 15.sp,
+                fontFamily = FontFamily(Font(R.font.graphik_medium)),
+                fontWeight = FontWeight(600),
+                color = Color(0xFF3D3BFF),
+            ))
+            RotatedCaret()
+        }
+    }
+}
+
+@Composable
+fun ImageGallery(images: List<ImageOfFilm>, path: (String) -> Unit, kinopoiskId: Int) {
+    if (images.isNotEmpty()) {
         Column(
             Modifier
                 .fillMaxWidth()
-                .height(200.dp)) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Галерея",
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFF272727),
-                    )
-                )
-                Row(
-                    modifier = Modifier.clickable { },
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = images.size.toString(),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFF3D3BFF),
-                        )
-                    )
-                    Image(
-                        painter = painterResource(R.drawable.caret_left),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .graphicsLayer(rotationZ = 180f)
-                            .size(18.dp),
-                        colorFilter = ColorFilter.tint(Color(0xFF3D3BFF))
-                    )
-                }
-            }
+                .height(200.dp)
+        ) {
+            Header("Галерея", images, {path(HomeRoutes.FILM_IMAGES + "/${kinopoiskId}")})
             LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 items(images) { image ->
-                    Image(
-                        painter = rememberImagePainter(image.imageUrl), contentDescription = "",
+                    AsyncImage(
+                        model = image.imageUrl,
+                        contentDescription = "",
                         modifier = Modifier
                             .height(400.dp)
                             .width(200.dp)
@@ -289,7 +291,7 @@ fun ImageGallery(images: List<ImageOfFilm>) {
 
 @Composable
 fun SimilarFilms(similar: List<SimilarFilm>, path: (String) -> Unit) {
-    if (similar.size != 0) {
+    if (similar.isNotEmpty()) {
         Column {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -318,14 +320,7 @@ fun SimilarFilms(similar: List<SimilarFilm>, path: (String) -> Unit) {
                             color = Color(0xFF3D3BFF),
                         )
                     )
-                    Image(
-                        painter = painterResource(R.drawable.caret_left),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .graphicsLayer(rotationZ = 180f)
-                            .size(18.dp),
-                        colorFilter = ColorFilter.tint(Color(0xFF3D3BFF))
-                    )
+                    RotatedCaret()
                 }
             }
             Spacer(Modifier.height(32.dp))
@@ -335,8 +330,8 @@ fun SimilarFilms(similar: List<SimilarFilm>, path: (String) -> Unit) {
 
             ) {
                 items(similar) { similarFilm ->
-                    SimilarCard(similarFilm,onClick = {
-                        path(HomeRoutes.HOME_DETAIL+"/${similarFilm.filmId}")
+                    SimilarCard(similarFilm, onClick = {
+                        path(HomeRoutes.HOME_DETAIL + "/${similarFilm.filmId}")
                     })
                 }
             }
@@ -344,9 +339,6 @@ fun SimilarFilms(similar: List<SimilarFilm>, path: (String) -> Unit) {
         Spacer(Modifier.height(32.dp))
     }
 }
-
-
-
 
 
 @Composable
@@ -385,7 +377,7 @@ fun SimilarCard(similarFilm: SimilarFilm, onClick: () -> Unit) {
 
 @Composable
 fun StuffLists(stuffs: List<ActorByFilm>, topic: String) {
-    if (stuffs.size != 0) {
+    if (stuffs.isNotEmpty()) {
         Column {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -414,14 +406,7 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String) {
                             color = Color(0xFF3D3BFF),
                         )
                     )
-                    Image(
-                        painter = painterResource(R.drawable.caret_left),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .graphicsLayer(rotationZ = 180f)
-                            .size(18.dp),
-                        colorFilter = ColorFilter.tint(Color(0xFF3D3BFF))
-                    )
+                    RotatedCaret()
                 }
             }
             Spacer(Modifier.height(32.dp))
@@ -444,4 +429,17 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String) {
             Spacer(Modifier.height(32.dp))
         }
     }
+}
+
+
+@Composable
+fun RotatedCaret() {
+    Image(
+        painter = painterResource(R.drawable.caret_left),
+        contentDescription = "",
+        modifier = Modifier
+            .graphicsLayer(rotationZ = 180f)
+            .size(18.dp),
+        colorFilter = ColorFilter.tint(Color(0xFF3D3BFF))
+    )
 }
