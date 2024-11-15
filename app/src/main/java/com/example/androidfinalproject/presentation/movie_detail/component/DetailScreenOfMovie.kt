@@ -145,7 +145,7 @@ fun DetailScreenOfMovie(
                     }
 
                     val ageLimit = movie.ratingAgeLimits
-                    if (ageLimit != null) {
+                    if (!ageLimit.isNullOrEmpty()) {
                         lengthOfMovie += ", " + ageLimit.substring(3) + "+"
                     }
 
@@ -165,13 +165,13 @@ fun DetailScreenOfMovie(
                         Modifier.padding(top = 10.dp),
                         horizontalArrangement = Arrangement.spacedBy(17.dp)
                     ) {
-                        Image(contentDescription = "", painter = painterResource(R.drawable.liked))
-                        Image(contentDescription = "", painter = painterResource(R.drawable.saved))
-                        Image(contentDescription = "", painter = painterResource(R.drawable.isseen))
-                        Image(contentDescription = "", painter = painterResource(R.drawable.share))
+                        Image(contentDescription = "", painter = painterResource(R.drawable.liked), modifier = Modifier.clickable {  })
+                        Image(contentDescription = "", painter = painterResource(R.drawable.saved), modifier = Modifier.clickable {  })
+                        Image(contentDescription = "", painter = painterResource(R.drawable.isseen), modifier = Modifier.clickable {  })
+                        Image(contentDescription = "", painter = painterResource(R.drawable.share), modifier = Modifier.clickable {  })
                         Image(
                             contentDescription = "",
-                            painter = painterResource(R.drawable.threedots)
+                            painter = painterResource(R.drawable.threedots), modifier = Modifier.clickable {  }
                         )
                     }
                 }
@@ -181,7 +181,8 @@ fun DetailScreenOfMovie(
                     .fillMaxSize()
                     .padding(horizontal = 30.dp, vertical = 45.dp)
             ) {
-                if (movie.shortDescription != null) {
+
+                if (!movie.shortDescription.isNullOrEmpty()) {
                     Text(
                         text = movie.shortDescription,
                         style = TextStyle(
@@ -194,7 +195,7 @@ fun DetailScreenOfMovie(
                     )
                     Spacer(Modifier.height(30.dp))
                 }
-                if (movie.description != null) {
+                if (!movie.description.isNullOrEmpty()) {
 
                     Text(
                         text = movie.description,
@@ -214,14 +215,14 @@ fun DetailScreenOfMovie(
                 val actors = mutableListOf<ActorByFilm>()
 
                 for (stuff in stuffs) {
-                    if (stuff.professionKey == "ACTOR" && stuff.nameRu != null) {
+                    if (stuff.professionKey == "ACTOR") {
                         actors.add(stuff)
                     } else {
                         directors.add(stuff)
                     }
                 }
-                StuffLists(actors, "В фильме снимались")
-                StuffLists(directors, "Над фильмом работали")
+                StuffLists(actors, "В фильме снимались",4)
+                StuffLists(directors, "Над фильмом работали",2)
                 ImageGallery(images,path,movie.kinopoiskId)
                 SimilarFilms(similar, path)
             }
@@ -298,30 +299,7 @@ fun SimilarFilms(similar: List<SimilarFilm>, path: (String) -> Unit) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "Похожие фильмы",
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFF272727),
-                    )
-                )
-                Row(
-                    modifier = Modifier.clickable { },
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = similar.size.toString(),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFF3D3BFF),
-                        )
-                    )
-                    RotatedCaret()
-                }
+                Header("Похожие фильмы", similar,{})
             }
             Spacer(Modifier.height(32.dp))
             LazyRow(
@@ -376,7 +354,7 @@ fun SimilarCard(similarFilm: SimilarFilm, onClick: () -> Unit) {
 
 
 @Composable
-fun StuffLists(stuffs: List<ActorByFilm>, topic: String) {
+fun StuffLists(stuffs: List<ActorByFilm>, topic: String,chunkSize:Int) {
     if (stuffs.isNotEmpty()) {
         Column {
             Row(
@@ -384,30 +362,7 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = topic,
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFF272727),
-                    )
-                )
-                Row(
-                    modifier = Modifier.clickable { },
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = stuffs.size.toString(),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFF3D3BFF),
-                        )
-                    )
-                    RotatedCaret()
-                }
+                Header(topic,stuffs,{})
             }
             Spacer(Modifier.height(32.dp))
             LazyRow(
@@ -416,7 +371,7 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String) {
 
             ) {
 
-                items(stuffs.chunked(2)) { sortedActor ->
+                items(stuffs.chunked(chunkSize)) { sortedActor ->
                     Column(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
