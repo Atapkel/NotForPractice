@@ -2,6 +2,7 @@ package com.example.androidfinalproject.presentation.actor.component
 
 import Movie
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,11 +26,12 @@ import coil.compose.AsyncImage
 import com.example.androidfinalproject.R
 
 @Composable
-fun ActorMovieCard(movie: Movie) {
+fun ActorMovieCard(movie: Movie,onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .width(111.dp)
             .height(194.dp)
+            .clickable { onClick() }
     ) {
         Box(
             modifier = Modifier

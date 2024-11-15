@@ -28,14 +28,15 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.ActorByFilm
+import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
 
 
 @Composable
-fun ActorCard(actor: ActorByFilm) {
+fun ActorCard(actor: ActorByFilm,path: (String) -> Unit) {
     Row(
         Modifier
             .fillMaxSize()
-            .clickable {  },
+            .clickable { path(HomeRoutes.ACTOR_INFO + "/${actor.staffId}")},
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
