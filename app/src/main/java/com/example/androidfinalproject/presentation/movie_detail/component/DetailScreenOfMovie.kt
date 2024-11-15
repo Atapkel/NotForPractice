@@ -221,8 +221,8 @@ fun DetailScreenOfMovie(
                         directors.add(stuff)
                     }
                 }
-                StuffLists(actors, "В фильме снимались",4)
-                StuffLists(directors, "Над фильмом работали",2)
+                StuffLists(actors, "В фильме снимались",4,path)
+                StuffLists(directors, "Над фильмом работали",2,path)
                 ImageGallery(images,path,movie.kinopoiskId)
                 SimilarFilms(similar, path)
             }
@@ -354,7 +354,7 @@ fun SimilarCard(similarFilm: SimilarFilm, onClick: () -> Unit) {
 
 
 @Composable
-fun StuffLists(stuffs: List<ActorByFilm>, topic: String,chunkSize:Int) {
+fun StuffLists(stuffs: List<ActorByFilm>, topic: String,chunkSize:Int,path: (String) -> Unit) {
     if (stuffs.isNotEmpty()) {
         Column {
             Row(
@@ -376,7 +376,7 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String,chunkSize:Int) {
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         sortedActor.forEach { actor ->
-                            ActorCard(actor)
+                            ActorCard(actor,path)
                         }
                     }
                 }
