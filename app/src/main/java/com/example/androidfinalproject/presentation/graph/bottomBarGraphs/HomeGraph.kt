@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.example.androidfinalproject.presentation.actor.ActorScreen
 import com.example.androidfinalproject.presentation.genre.GenreScreen
 import com.example.androidfinalproject.presentation.movie_detail.DetailScreen
 import com.example.androidfinalproject.presentation.home.HomeScreen
@@ -47,6 +48,27 @@ fun NavGraphBuilder.homeGraph(navController: NavHostController) {
             val id = entry.arguments?.getInt("id") ?: 0
             FilmImage(id, path = { route -> navController.navigate(route) })
         }
+        composable(
+            route = HomeRoutes.ACTOR_INFO + "/{id}",
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.IntType
+                }
+            )
+        ) { entry ->
+            val id = entry.arguments?.getInt("id") ?: 0
+            ActorScreen(
+                id = id,
+                path = { route ->
+                    if (route == "Back") {
+                        navController.popBackStack()
+                    } else {
+                        navController.navigate(route)
+                    }
+                }
+            )
+        }
+
     }
 }
 
@@ -55,4 +77,5 @@ object HomeRoutes {
     const val HOME_MAIN = "home_main_screen"
     const val HOME_DETAIL = "home_detail_screen"
     const val HOME_SEE_ALL = "home_see_screen"
+    const val ACTOR_INFO = "actor_info"
 }

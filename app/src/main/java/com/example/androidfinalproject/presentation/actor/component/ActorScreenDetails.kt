@@ -38,9 +38,10 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.Actor
+import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
 
 @Composable
-fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>) {
+fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>,path: (String) -> Unit,) {
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -59,7 +60,7 @@ fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>) {
             Image(
                 painter = painterResource(R.drawable.caret_left),
                 contentDescription = "",
-                modifier = Modifier.clickable {}
+                modifier = Modifier.clickable {path("Back")}
             )
 
         }
@@ -105,16 +106,16 @@ fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>) {
             }
         }
         Spacer(modifier = Modifier.height(40.dp))
-        ListRow("Лучшее","Все",false,filmCount)
+        ListRow("Лучшее","Все",false,filmCount,path)
         Spacer(modifier = Modifier.height(24.dp))
-        FilmRow(movies)
+        FilmRow(movies,path)
         Spacer(modifier = Modifier.height(36.dp))
-        ListRow("Фильмография","К списку",true,filmCount)
+        ListRow("Фильмография","К списку",true,filmCount,path)
     }
 }
 
 @Composable
-fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int){
+fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int,path: (String) -> Unit){
     Row (
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -174,12 +175,13 @@ fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int){
 }
 
 @Composable
-fun FilmRow(movies: List<Movie>) {
+fun FilmRow(movies: List<Movie>,path: (String) -> Unit) {
     Row {
         LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             items(movies) { movie ->
                 ActorMovieCard(
-                    movie = movie
+                    movie = movie,
+                    onClick = { path(HomeRoutes.HOME_DETAIL+"/${movie.kinopoiskId}") }
                 )
             }
             item {

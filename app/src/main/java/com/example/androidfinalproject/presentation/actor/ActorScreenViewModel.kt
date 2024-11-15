@@ -3,12 +3,14 @@ package com.example.androidfinalproject.presentation.actor
 import Movie
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidfinalproject.data.repository.Repository
 import com.example.androidfinalproject.domain.model.Actor
 import com.example.androidfinalproject.domain.model.Film
+import com.example.androidfinalproject.presentation.movie_detail.DetailScreenViewModel
 import kotlinx.coroutines.launch
 
 class ActorScreenViewModel(id: Int): ViewModel() {

@@ -2,5 +2,5 @@ package com.example.androidfinalproject.util
 
 object Constants {
     const val BASE_URL = "https://kinopoiskapiunofficial.tech"
-    const val TOKEN = "2b8eeeda-ed43-477d-afe8-b7460ccfe3c5"
+    const val TOKEN = "0ad60e36-48a4-4e74-8adf-eb79f73220a7"
 }
