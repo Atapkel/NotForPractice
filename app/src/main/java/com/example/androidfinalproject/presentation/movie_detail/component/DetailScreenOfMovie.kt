@@ -219,8 +219,8 @@ fun DetailScreenOfMovie(
                         directors.add(stuff)
                     }
                 }
-                StuffLists(actors, "В фильме снимались")
-                StuffLists(directors, "Над фильмом работали")
+                StuffLists(actors, "В фильме снимались", path)
+                StuffLists(directors, "Над фильмом работали", path)
                 ImageGallery(images)
                 SimilarFilms(similar, path)
             }
@@ -229,7 +229,7 @@ fun DetailScreenOfMovie(
 }
 
 @Composable
-fun ImageGallery(images: List<ImageOfFilm>) {
+fun ImageGallery(images: List<ImageOfFilm>, ) {
     if (images.size != 0) {
         Column(
             Modifier
@@ -250,7 +250,9 @@ fun ImageGallery(images: List<ImageOfFilm>) {
                     )
                 )
                 Row(
-                    modifier = Modifier.clickable { },
+                    modifier = Modifier.clickable {
+                        //TODO
+                    },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -384,7 +386,7 @@ fun SimilarCard(similarFilm: SimilarFilm, onClick: () -> Unit) {
 
 
 @Composable
-fun StuffLists(stuffs: List<ActorByFilm>, topic: String) {
+fun StuffLists(stuffs: List<ActorByFilm>, topic: String, path: (String) -> Unit) {
     if (stuffs.size != 0) {
         Column {
             Row(
@@ -402,7 +404,9 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String) {
                     )
                 )
                 Row(
-                    modifier = Modifier.clickable { },
+                    modifier = Modifier.clickable {
+
+                    },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -436,7 +440,7 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String) {
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         sortedActor.forEach { actor ->
-                            ActorCard(actor)
+                            ActorCard(actor, path)
                         }
                     }
                 }
