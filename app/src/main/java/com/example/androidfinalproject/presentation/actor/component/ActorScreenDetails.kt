@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -78,6 +79,10 @@ fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>,path: (S
                 AsyncImage(
                     model = actor.posterUrl,
                     contentDescription = actor.nameRu,
+                    modifier = Modifier
+                        .width(146.dp)
+                        .height(201.dp),
+                    contentScale = ContentScale.Crop
                     )
             }
             Column (
@@ -106,16 +111,18 @@ fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>,path: (S
             }
         }
         Spacer(modifier = Modifier.height(40.dp))
-        ListRow("Лучшее","Все",false,filmCount)
-        Spacer(modifier = Modifier.height(24.dp))
-        FilmRow(movies,path)
-        Spacer(modifier = Modifier.height(36.dp))
-        ListRow("Фильмография","К списку",true,filmCount)
+        if(movies.isNotEmpty()){
+            ListRow("Лучшее","Все",false,filmCount,path)
+            Spacer(modifier = Modifier.height(24.dp))
+            FilmRow(movies,path)
+            Spacer(modifier = Modifier.height(36.dp))
+        }
+        ListRow("Фильмография","К списку",true,filmCount,path)
     }
 }
 
 @Composable
-fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int){
+fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int,path: (String) -> Unit){
     Row (
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -144,14 +151,13 @@ fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int){
                         color = Color(0xFF838391),
                     )
                 )
-
             }
         }
         Row(
             horizontalArrangement = Arrangement.spacedBy(2.dp),
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .clickable {}
+                .clickable {  }
         ) {
             Text(
                 text = text,
