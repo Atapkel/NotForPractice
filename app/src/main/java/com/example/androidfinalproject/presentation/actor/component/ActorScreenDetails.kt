@@ -112,17 +112,17 @@ fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>,path: (S
         }
         Spacer(modifier = Modifier.height(40.dp))
         if(movies.isNotEmpty()){
-            ListRow("Лучшее","Все",false,filmCount,path)
+            ListRow("Лучшее","Все",false,filmCount,path,actor)
             Spacer(modifier = Modifier.height(24.dp))
             FilmRow(movies,path)
             Spacer(modifier = Modifier.height(36.dp))
         }
-        ListRow("Фильмография","К списку",true,filmCount,path)
+        ListRow("Фильмография","К списку",true,filmCount,path,actor)
     }
 }
 
 @Composable
-fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int,path: (String) -> Unit){
+fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int,path: (String) -> Unit,actor: Actor){
     Row (
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -157,7 +157,7 @@ fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int,path:
             horizontalArrangement = Arrangement.spacedBy(2.dp),
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .clickable {  }
+                .clickable {  path(HomeRoutes.ACTOR_FILM + "/${actor.personId}")}
         ) {
             Text(
                 text = text,

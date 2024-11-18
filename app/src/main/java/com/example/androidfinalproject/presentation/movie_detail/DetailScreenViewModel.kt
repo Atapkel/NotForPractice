@@ -91,10 +91,4 @@ class DetailScreenViewModel(id: Int):ViewModel() {
             }
         }
     }
-
-    private fun getId(id: Int){
-        val ii = id
-    }
-
-
 }
