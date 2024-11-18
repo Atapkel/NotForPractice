@@ -106,16 +106,16 @@ fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>,path: (S
             }
         }
         Spacer(modifier = Modifier.height(40.dp))
-        ListRow("Лучшее","Все",false,filmCount,path)
+        ListRow("Лучшее","Все",false,filmCount)
         Spacer(modifier = Modifier.height(24.dp))
         FilmRow(movies,path)
         Spacer(modifier = Modifier.height(36.dp))
-        ListRow("Фильмография","К списку",true,filmCount,path)
+        ListRow("Фильмография","К списку",true,filmCount)
     }
 }
 
 @Composable
-fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int,path: (String) -> Unit){
+fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int){
     Row (
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -144,13 +144,14 @@ fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int,path:
                         color = Color(0xFF838391),
                     )
                 )
+
             }
         }
         Row(
             horizontalArrangement = Arrangement.spacedBy(2.dp),
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .clickable {  }
+                .clickable {}
         ) {
             Text(
                 text = text,
