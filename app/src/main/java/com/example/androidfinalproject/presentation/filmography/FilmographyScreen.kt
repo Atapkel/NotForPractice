@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,19 +27,16 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.presentation.filmography.components.FilmographyMovie
 import com.example.androidfinalproject.presentation.filmography.components.FilmographyTypeClickable
-import com.sdu.skillcinema.presentation.staff_filmography.FilmographyViewModel
 
 @Composable
 fun StaffFilmographyScreen(
-    staffFilmographyViewModel: FilmographyViewModel = viewModel(),
-    navController: NavController
+    id:Int,
+    path: (String) -> Unit
 ) {
-
+    val staffFilmographyViewModel: FilmographyViewModel = remember { FilmographyViewModel(id) }
     val state by staffFilmographyViewModel.state.collectAsState()
 
     Column(
@@ -50,7 +48,7 @@ fun StaffFilmographyScreen(
                 .fillMaxWidth()
         ) {
             IconButton(
-                onClick = { navController.popBackStack() },
+                onClick = { path("Back")},
                 modifier = Modifier
                     .background(Color.Transparent)
             ) {
@@ -127,7 +125,7 @@ fun StaffFilmographyScreen(
                     .padding(top = 24.dp)
             ) {
                 items(state.movies.get(state.professionKey)!!) { movie ->
-                    FilmographyMovie(movie = movie, navController = navController)
+                    FilmographyMovie(movie = movie, path)
                 }
             }
 

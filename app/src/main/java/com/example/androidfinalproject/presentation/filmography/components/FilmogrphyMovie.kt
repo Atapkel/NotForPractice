@@ -23,11 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
 
 @Composable
 fun FilmographyMovie(
     movie: Movie,
-    navController: NavController
+    path: (String) -> Unit
 ) {
     Row (
         modifier = Modifier
@@ -37,7 +38,7 @@ fun FilmographyMovie(
             .clickable {  }
     ) {
         Box(
-            modifier = Modifier.clickable { /*TODO*/ }
+            modifier = Modifier.clickable { path(HomeRoutes.HOME_DETAIL+"/${movie.kinopoiskId}") }
         ){
             AsyncImage(
                 modifier = Modifier
