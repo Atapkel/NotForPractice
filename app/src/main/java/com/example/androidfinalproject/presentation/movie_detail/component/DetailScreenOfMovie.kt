@@ -87,7 +87,7 @@ fun DetailScreenOfMovie(
                     painter = painterResource(R.drawable.caret_left),
                     modifier = Modifier
                         .clickable {
-                            path(HomeRoutes.HOME_MAIN)
+                            path("Back")
                         }
                         .padding(horizontal = 30.dp, vertical = 20.dp))
                 Column(

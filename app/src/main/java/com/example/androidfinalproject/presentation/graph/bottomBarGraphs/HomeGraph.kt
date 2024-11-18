@@ -27,7 +27,13 @@ fun NavGraphBuilder.homeGraph(navController: NavHostController) {
             )
         ) { entry ->
             val id = entry.arguments?.getInt("id") ?: 0
-            DetailScreen(id, path = { route -> navController.navigate(route) })
+            DetailScreen(id, path = { route ->
+                if (route == "Back") {
+                    navController.popBackStack()
+                } else {
+                    navController.navigate(route)
+                }
+            })
         }
         composable(route = HomeRoutes.HOME_SEE_ALL + "/{type}",
             arguments = listOf(
