@@ -36,15 +36,22 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.ActorByFilm
 import com.example.androidfinalproject.domain.model.ImageOfFilm
-
 import com.example.androidfinalproject.domain.model.SimilarFilm
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
+
+
+private val gradient = Brush.verticalGradient(
+    colors = listOf(
+        Color(0x001B1B1B),
+        Color(0xFF1B1B1B),
+    )
+)
+
 
 
 @Composable
@@ -55,12 +62,6 @@ fun DetailScreenOfMovie(
     similar: List<SimilarFilm>,
     path: (String) -> Unit
 ) {
-    val gradient = Brush.verticalGradient(
-        colors = listOf(
-            Color(0x001B1B1B),
-            Color(0xFF1B1B1B),
-        )
-    )
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             Box(
@@ -144,7 +145,7 @@ fun DetailScreenOfMovie(
                     }
 
                     val ageLimit = movie.ratingAgeLimits
-                    if (ageLimit != null) {
+                    if (!ageLimit.isNullOrEmpty()) {
                         lengthOfMovie += ", " + ageLimit.substring(3) + "+"
                     }
 
@@ -164,13 +165,13 @@ fun DetailScreenOfMovie(
                         Modifier.padding(top = 10.dp),
                         horizontalArrangement = Arrangement.spacedBy(17.dp)
                     ) {
-                        Image(contentDescription = "", painter = painterResource(R.drawable.liked))
-                        Image(contentDescription = "", painter = painterResource(R.drawable.saved))
-                        Image(contentDescription = "", painter = painterResource(R.drawable.isseen))
-                        Image(contentDescription = "", painter = painterResource(R.drawable.share))
+                        Image(contentDescription = "", painter = painterResource(R.drawable.liked), modifier = Modifier.clickable {  })
+                        Image(contentDescription = "", painter = painterResource(R.drawable.saved), modifier = Modifier.clickable {  })
+                        Image(contentDescription = "", painter = painterResource(R.drawable.isseen), modifier = Modifier.clickable {  })
+                        Image(contentDescription = "", painter = painterResource(R.drawable.share), modifier = Modifier.clickable {  })
                         Image(
                             contentDescription = "",
-                            painter = painterResource(R.drawable.threedots)
+                            painter = painterResource(R.drawable.threedots), modifier = Modifier.clickable {  }
                         )
                     }
                 }
@@ -180,7 +181,8 @@ fun DetailScreenOfMovie(
                     .fillMaxSize()
                     .padding(horizontal = 30.dp, vertical = 45.dp)
             ) {
-                if (movie.shortDescription != null) {
+
+                if (!movie.shortDescription.isNullOrEmpty()) {
                     Text(
                         text = movie.shortDescription,
                         style = TextStyle(
@@ -193,7 +195,7 @@ fun DetailScreenOfMovie(
                     )
                     Spacer(Modifier.height(30.dp))
                 }
-                if (movie.description != null) {
+                if (!movie.description.isNullOrEmpty()) {
 
                     Text(
                         text = movie.description,
@@ -213,71 +215,70 @@ fun DetailScreenOfMovie(
                 val actors = mutableListOf<ActorByFilm>()
 
                 for (stuff in stuffs) {
-                    if (stuff.professionKey == "ACTOR" && stuff.nameRu != null) {
+                    if (stuff.professionKey == "ACTOR") {
                         actors.add(stuff)
                     } else {
                         directors.add(stuff)
                     }
                 }
-                StuffLists(actors, "В фильме снимались", path)
-                StuffLists(directors, "Над фильмом работали", path)
-                ImageGallery(images)
+                StuffLists(actors, "В фильме снимались",4,path)
+                StuffLists(directors, "Над фильмом работали",2,path)
+                ImageGallery(images,path,movie.kinopoiskId)
                 SimilarFilms(similar, path)
             }
         }
     }
 }
 
+
+
 @Composable
-fun ImageGallery(images: List<ImageOfFilm>, ) {
-    if (images.size != 0) {
+fun Header(topic: String, list: List<Any>,onClick: () -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = topic,
+            style = TextStyle(
+                fontSize = 20.sp,
+                fontFamily = FontFamily(Font(R.font.graphik_medium)),
+                fontWeight = FontWeight(600),
+                color = Color(0xFF272727),
+            )
+        )
+        Row(
+            modifier = Modifier.clickable {
+                onClick()
+            },
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = list.size.toString(), style = TextStyle(
+                fontSize = 15.sp,
+                fontFamily = FontFamily(Font(R.font.graphik_medium)),
+                fontWeight = FontWeight(600),
+                color = Color(0xFF3D3BFF),
+            ))
+            RotatedCaret()
+        }
+    }
+}
+
+@Composable
+fun ImageGallery(images: List<ImageOfFilm>, path: (String) -> Unit, kinopoiskId: Int) {
+    if (images.isNotEmpty()) {
         Column(
             Modifier
                 .fillMaxWidth()
-                .height(200.dp)) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Галерея",
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFF272727),
-                    )
-                )
-                Row(
-                    modifier = Modifier.clickable {
-                        //TODO
-                    },
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = images.size.toString(),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFF3D3BFF),
-                        )
-                    )
-                    Image(
-                        painter = painterResource(R.drawable.caret_left),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .graphicsLayer(rotationZ = 180f)
-                            .size(18.dp),
-                        colorFilter = ColorFilter.tint(Color(0xFF3D3BFF))
-                    )
-                }
-            }
+                .height(200.dp)
+        ) {
+            Header("Галерея", images, {path(HomeRoutes.FILM_IMAGES + "/${kinopoiskId}")})
             LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 items(images) { image ->
-                    Image(
-                        painter = rememberImagePainter(image.imageUrl), contentDescription = "",
+                    AsyncImage(
+                        model = image.imageUrl,
+                        contentDescription = "",
                         modifier = Modifier
                             .height(400.dp)
                             .width(200.dp)
@@ -291,44 +292,14 @@ fun ImageGallery(images: List<ImageOfFilm>, ) {
 
 @Composable
 fun SimilarFilms(similar: List<SimilarFilm>, path: (String) -> Unit) {
-    if (similar.size != 0) {
+    if (similar.isNotEmpty()) {
         Column {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "Похожие фильмы",
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFF272727),
-                    )
-                )
-                Row(
-                    modifier = Modifier.clickable { },
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = similar.size.toString(),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFF3D3BFF),
-                        )
-                    )
-                    Image(
-                        painter = painterResource(R.drawable.caret_left),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .graphicsLayer(rotationZ = 180f)
-                            .size(18.dp),
-                        colorFilter = ColorFilter.tint(Color(0xFF3D3BFF))
-                    )
-                }
+                Header("Похожие фильмы", similar,{})
             }
             Spacer(Modifier.height(32.dp))
             LazyRow(
@@ -337,8 +308,8 @@ fun SimilarFilms(similar: List<SimilarFilm>, path: (String) -> Unit) {
 
             ) {
                 items(similar) { similarFilm ->
-                    SimilarCard(similarFilm,onClick = {
-                        path(HomeRoutes.HOME_DETAIL+"/${similarFilm.filmId}")
+                    SimilarCard(similarFilm, onClick = {
+                        path(HomeRoutes.HOME_DETAIL + "/${similarFilm.filmId}")
                     })
                 }
             }
@@ -346,9 +317,6 @@ fun SimilarFilms(similar: List<SimilarFilm>, path: (String) -> Unit) {
         Spacer(Modifier.height(32.dp))
     }
 }
-
-
-
 
 
 @Composable
@@ -386,47 +354,15 @@ fun SimilarCard(similarFilm: SimilarFilm, onClick: () -> Unit) {
 
 
 @Composable
-fun StuffLists(stuffs: List<ActorByFilm>, topic: String, path: (String) -> Unit) {
-    if (stuffs.size != 0) {
+fun StuffLists(stuffs: List<ActorByFilm>, topic: String,chunkSize:Int,path: (String) -> Unit) {
+    if (stuffs.isNotEmpty()) {
         Column {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = topic,
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFF272727),
-                    )
-                )
-                Row(
-                    modifier = Modifier.clickable {
-
-                    },
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = stuffs.size.toString(),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFF3D3BFF),
-                        )
-                    )
-                    Image(
-                        painter = painterResource(R.drawable.caret_left),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .graphicsLayer(rotationZ = 180f)
-                            .size(18.dp),
-                        colorFilter = ColorFilter.tint(Color(0xFF3D3BFF))
-                    )
-                }
+                Header(topic,stuffs,{})
             }
             Spacer(Modifier.height(32.dp))
             LazyRow(
@@ -435,12 +371,12 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String, path: (String) -> Unit)
 
             ) {
 
-                items(stuffs.chunked(2)) { sortedActor ->
+                items(stuffs.chunked(chunkSize)) { sortedActor ->
                     Column(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         sortedActor.forEach { actor ->
-                            ActorCard(actor, path)
+                            ActorCard(actor,path)
                         }
                     }
                 }
@@ -448,4 +384,17 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String, path: (String) -> Unit)
             Spacer(Modifier.height(32.dp))
         }
     }
+}
+
+
+@Composable
+fun RotatedCaret() {
+    Image(
+        painter = painterResource(R.drawable.caret_left),
+        contentDescription = "",
+        modifier = Modifier
+            .graphicsLayer(rotationZ = 180f)
+            .size(18.dp),
+        colorFilter = ColorFilter.tint(Color(0xFF3D3BFF))
+    )
 }

@@ -18,7 +18,7 @@ import com.example.androidfinalproject.R
 import com.example.androidfinalproject.presentation.actor.component.ActorScreenDetails
 
 @Composable
-fun ActorScreen(id: Int) {
+fun ActorScreen(id: Int,path: (String) -> Unit) {
     val viewModel: ActorScreenViewModel = remember { ActorScreenViewModel(id) }
 
     when (val state = viewModel.state) {
@@ -36,7 +36,7 @@ fun ActorScreen(id: Int) {
         }
 
         is ActorState.Success -> {
-            ActorScreenDetails(state.actor)
+            ActorScreenDetails(state.actor,state.filmCount,state.movies,path)
         }
         is ActorState.Error -> {
             Column(

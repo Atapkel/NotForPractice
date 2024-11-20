@@ -32,13 +32,11 @@ import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRo
 
 
 @Composable
-fun ActorCard(actor: ActorByFilm, path: (String) -> Unit) {
+fun ActorCard(actor: ActorByFilm,path: (String) -> Unit) {
     Row(
         Modifier
             .fillMaxSize()
-            .clickable {
-                path(HomeRoutes.HOME_ACTOR+"/${actor.staffId}")
-            },
+            .clickable { path(HomeRoutes.ACTOR_INFO + "/${actor.staffId}")},
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
