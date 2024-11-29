@@ -4,6 +4,7 @@ import Movie
 import MovieResponse
 import com.example.androidfinalproject.domain.model.Actor
 import com.example.androidfinalproject.domain.model.ActorByFilm
+import com.example.androidfinalproject.domain.model.FilmSearch
 import com.example.androidfinalproject.domain.model.ImagesOfFilm
 import com.example.androidfinalproject.domain.model.SimilarFilmsResponse
 import com.example.androidfinalproject.util.Constants.TOKEN
@@ -32,7 +33,6 @@ interface ApiInterface {
         @Header("X-API-KEY") apiKey: String = TOKEN
     ): Response<Movie>
 
-
     @GET("/api/v1/staff")
     suspend fun getFilmActors(
         @Query("filmId") filmId: Int,
@@ -50,4 +50,9 @@ interface ApiInterface {
         @Path("id") id: Int,
         @Header("X-API-KEY") apiKey: String = TOKEN
     ): Response<SimilarFilmsResponse>
+
+    @GET("api/v2.1/films/search-by-keyword")
+    suspend fun searchFilms(
+        @Query("keyword") keyword: String
+    ): Response<FilmSearch>
 }
