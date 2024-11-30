@@ -7,14 +7,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.example.androidfinalproject.presentation.actor.ActorScreen
 import com.example.androidfinalproject.presentation.graph.RootNavGraph
+import com.example.androidfinalproject.presentation.search.SearchScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val navController = rememberNavController()
-            RootNavGraph(navController)
+//            val navController = rememberNavController()
+//            RootNavGraph(navController)
+
+            SearchScreen()
         }
     }
 }

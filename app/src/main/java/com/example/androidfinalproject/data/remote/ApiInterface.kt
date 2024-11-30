@@ -51,8 +51,9 @@ interface ApiInterface {
         @Header("X-API-KEY") apiKey: String = TOKEN
     ): Response<SimilarFilmsResponse>
 
-    @GET("api/v2.1/films/search-by-keyword")
+    @GET("/api/v2.1/films/search-by-keyword")
     suspend fun searchFilms(
-        @Query("keyword") keyword: String
+        @Query("keyword") keyword: String,
+        @Header("X-API-KEY") apiKey: String = TOKEN
     ): Response<FilmSearch>
 }
