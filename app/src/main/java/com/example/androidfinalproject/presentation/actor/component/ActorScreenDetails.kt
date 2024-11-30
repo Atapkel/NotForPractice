@@ -61,7 +61,7 @@ fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>,path: (S
             Image(
                 painter = painterResource(R.drawable.caret_left),
                 contentDescription = "",
-                modifier = Modifier.clickable {path(HomeRoutes.BACK)}
+                modifier = Modifier.clickable {path("Back")}
             )
 
         }
@@ -112,17 +112,17 @@ fun ActorScreenDetails(actor: Actor, filmCount: Int,movies: List<Movie>,path: (S
         }
         Spacer(modifier = Modifier.height(40.dp))
         if(movies.isNotEmpty()){
-            ListRow("Лучшее","Все",false,filmCount,path, actor.personId)
+            ListRow("Лучшее","Все",false,filmCount,path,actor)
             Spacer(modifier = Modifier.height(24.dp))
             FilmRow(movies,path)
             Spacer(modifier = Modifier.height(36.dp))
         }
-        ListRow("Фильмография","К списку",true,filmCount,path, actor.personId)
+        ListRow("Фильмография","К списку",true,filmCount,path,actor)
     }
 }
 
 @Composable
-fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int,path: (String) -> Unit, staffId: Int){
+fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int,path: (String) -> Unit,actor: Actor){
     Row (
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -157,9 +157,7 @@ fun ListRow(mainText:String, text:String, isFilmography: Boolean,count:Int,path:
             horizontalArrangement = Arrangement.spacedBy(2.dp),
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .clickable {
-//                    println("Test")
-                    path(HomeRoutes.FILMOGRAPHY + "/$staffId") }
+                .clickable {  path(HomeRoutes.ACTOR_FILM + "/${actor.personId}")}
         ) {
             Text(
                 text = text,

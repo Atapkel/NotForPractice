@@ -1,21 +1,19 @@
-package com.sdu.skillcinema.presentation.staff_filmography
+package com.example.androidfinalproject.presentation.filmography
 
 import Movie
 import ProfessionKey
-import androidx.core.view.OneShotPreDrawListener.add
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidfinalproject.data.repository.Repository
 import com.example.androidfinalproject.domain.model.Actor
-import com.example.androidfinalproject.presentation.filmography.FilmographyState
 import getProfessionKeyFromString
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class FilmographyViewModel(
-    savedStateHandle: SavedStateHandle
+    id: Int
 ): ViewModel() {
 
     private val _state = MutableStateFlow(FilmographyState())
@@ -24,11 +22,7 @@ class FilmographyViewModel(
     private val repository = Repository()
 
     init {
-        val id: Int? = savedStateHandle.get<String>("staffId")?.toInt()
-
-        if (id != null) {
-            getStaffFilmographyById(id)
-        }
+        getStaffFilmographyById(id)
     }
 
     fun changeFilmographyType(professionKey: ProfessionKey) {

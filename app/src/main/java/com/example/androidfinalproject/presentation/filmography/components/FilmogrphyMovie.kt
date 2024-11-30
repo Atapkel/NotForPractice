@@ -30,16 +30,16 @@ fun FilmographyMovie(
     movie: Movie,
     path: (String) -> Unit
 ) {
-    Row(
+    Row (
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 26.dp)
             .background(Color.White)
-            .clickable { }
+            .clickable {  }
     ) {
         Box(
-            modifier = Modifier.clickable { path(HomeRoutes.HOME_DETAIL + "${movie.kinopoiskId}") }
-        ) {
+            modifier = Modifier.clickable { path(HomeRoutes.HOME_DETAIL+"/${movie.kinopoiskId}") }
+        ){
             AsyncImage(
                 modifier = Modifier
                     .clip(RoundedCornerShape(4.dp))
@@ -74,7 +74,7 @@ fun FilmographyMovie(
             )
             var movieGenre: String = ""
             movie.genres.forEachIndexed { idx, gnr ->
-                if (idx == 0) {
+                if(idx == 0) {
                     movieGenre += gnr.genre
                 } else {
                     movieGenre += ", ${gnr.genre}"

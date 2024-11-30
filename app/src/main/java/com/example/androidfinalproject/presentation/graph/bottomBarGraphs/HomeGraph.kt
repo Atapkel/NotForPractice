@@ -27,7 +27,13 @@ fun NavGraphBuilder.homeGraph(navController: NavHostController) {
             )
         ) { entry ->
             val id = entry.arguments?.getInt("id") ?: 0
-            DetailScreen(id, path = { route -> navController.navigate(route) })
+            DetailScreen(id, path = { route ->
+                if (route == "Back") {
+                    navController.popBackStack()
+                } else {
+                    navController.navigate(route)
+                }
+            })
         }
         composable(route = HomeRoutes.HOME_SEE_ALL + "/{type}",
             arguments = listOf(
@@ -61,7 +67,7 @@ fun NavGraphBuilder.homeGraph(navController: NavHostController) {
             ActorScreen(
                 id = id,
                 path = { route ->
-                    if (route == HomeRoutes.BACK) {
+                    if (route == "Back") {
                         navController.popBackStack()
                     } else {
                         navController.navigate(route)
@@ -69,8 +75,25 @@ fun NavGraphBuilder.homeGraph(navController: NavHostController) {
                 }
             )
         }
-        composable(route = HomeRoutes.FILMOGRAPHY){
-            StaffFilmographyScreen(navController = navController)
+        composable(
+            route = HomeRoutes.ACTOR_FILM + "/{id}",
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.IntType
+                }
+            )
+        ) { entry ->
+            val id = entry.arguments?.getInt("id") ?: 0
+            StaffFilmographyScreen(
+                id = id,
+                path = { route ->
+                    if (route == "Back") {
+                        navController.popBackStack()
+                    } else {
+                        navController.navigate(route)
+                    }
+                }
+            )
         }
 
     }
@@ -82,7 +105,5 @@ object HomeRoutes {
     const val HOME_DETAIL = "home_detail_screen"
     const val HOME_SEE_ALL = "home_see_screen"
     const val ACTOR_INFO = "actor_info"
-    const val BACK = "Back"
-    const val FILMOGRAPHY = "filmography"
-
+    const val ACTOR_FILM = "actor_film"
 }
