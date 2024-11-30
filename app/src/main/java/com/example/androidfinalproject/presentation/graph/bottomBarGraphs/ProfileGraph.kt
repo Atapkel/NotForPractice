@@ -10,7 +10,7 @@ import com.example.androidfinalproject.presentation.profile.ProfileScreen
 fun NavGraphBuilder.profileGraph(navController: NavHostController) {
     navigation(route = BottomNavigationItem.Profile.route, startDestination = "profile") {
         composable(route = "profile") {
-            ProfileScreen()
+//            ProfileScreen()
         }
     }
 }

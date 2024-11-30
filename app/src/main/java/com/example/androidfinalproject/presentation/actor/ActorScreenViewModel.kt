@@ -31,7 +31,7 @@ class ActorScreenViewModel(id: Int): ViewModel() {
                     val actor = response.body() ?: Actor()
                     val generalFilmIds = actor.films.filter { it.general }.map { it.filmId }
                     val filmCount = actor.films.size
-                        val movies = fetchMovies(generalFilmIds)
+                    val movies = fetchMovies(generalFilmIds)
                     state = ActorState.Success(
                         actor = actor,
                         filmCount = filmCount,

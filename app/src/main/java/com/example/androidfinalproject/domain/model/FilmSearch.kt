@@ -1,10 +1,10 @@
 package com.example.androidfinalproject.domain.model
 
 data class FilmSearch(
-    val keyword: String,
-    val pagesCount: Int,
+    val keyword: String = "",
+    val pagesCount: Int = 0,
     val searchFilmsCountResult: Int = 0,
-    val films: List<FilmS>
+    val films: List<FilmS> = emptyList()
 )
 
 data class FilmS(
