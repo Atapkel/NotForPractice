@@ -42,7 +42,6 @@ import com.example.androidfinalproject.domain.dto.MovieDTO
 import com.example.androidfinalproject.presentation.genre.components.ListPage
 import com.example.androidfinalproject.presentation.graph.ProfileRoutes
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.BottomNavigationItem
-import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
 import com.example.androidfinalproject.presentation.profile.event.MovieEvent
 
 

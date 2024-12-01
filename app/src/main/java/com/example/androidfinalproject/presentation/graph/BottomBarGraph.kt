@@ -72,7 +72,7 @@ fun BottomBarGraph(
         }
 
         composable(route = BottomNavigationItem.Search.route) {
-            SearchScreen()
+//            SearchScreen()
         }
 
     }

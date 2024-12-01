@@ -37,7 +37,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.dto.MovieDTO
 import com.example.androidfinalproject.domain.model.ActorByFilm
@@ -75,8 +74,8 @@ fun DetailScreenOfMovie(
                     .fillMaxWidth()
             ) {
 
-                Image(
-                    painter = rememberImagePainter(movie.posterUrl),
+                AsyncImage(
+                    model = movie.posterUrl,
                     contentDescription = "",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -267,6 +266,7 @@ fun DetailScreenOfMovie(
                         directors.add(stuff)
                     }
                 }
+
                 StuffLists(actors, "В фильме снимались",4,path)
                 StuffLists(directors, "Над фильмом работали",2,path)
                 ImageGallery(images,path,movie.kinopoiskId)
@@ -431,7 +431,6 @@ fun StuffLists(stuffs: List<ActorByFilm>, topic: String,chunkSize:Int,path: (Str
         }
     }
 }
-
 
 @Composable
 fun RotatedCaret() {
