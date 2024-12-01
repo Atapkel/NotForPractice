@@ -9,10 +9,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.androidfinalproject.MainActivity
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.BottomNavigationItem
+import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.SearchRoutes
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.homeGraph
+import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.profileGraph
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.searchGraph
 import com.example.androidfinalproject.presentation.profile.ProfileScreen
 import com.example.androidfinalproject.presentation.profile.ProfileScreenViewModel
+import com.example.androidfinalproject.presentation.search.FilterScreen
 import com.example.androidfinalproject.presentation.search.SearchScreen
 
 
@@ -32,6 +35,10 @@ fun BottomBarGraph(navController: NavHostController, paddingValues: PaddingValue
         }
         composable(route = BottomNavigationItem.Search.route) {
             SearchScreen(navController)
+        }
+//        IT SHOULD BE LIKE THIS searchGraph -> composable(FilterScreen)
+        composable(route = SearchRoutes.FILTER) {
+            FilterScreen(navController)
         }
 
     }

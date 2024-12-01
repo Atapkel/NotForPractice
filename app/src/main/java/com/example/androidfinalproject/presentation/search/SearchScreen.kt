@@ -1,6 +1,5 @@
 package com.example.androidfinalproject.presentation.search
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -93,7 +92,6 @@ fun SearchBar(
                 modifier = Modifier
                     .size(20.dp)
                     .clickable {
-                        Log.d("filter_nav", "in filter clickable")
                         navController.navigate(SearchRoutes.FILTER)
                     }
             )
