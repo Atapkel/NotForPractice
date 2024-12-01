@@ -32,7 +32,7 @@ class SearchViewModel : ViewModel() {
                     _state.value = if (films.isNotEmpty()) {
                         SearchState.Success(films)
                     } else {
-                        SearchState.Error("No films found.")
+                        SearchState.Error(message = "No films found")
                     }
                 } else {
                     _state.value = SearchState.Error("Failed to load data: ${response.message()}")

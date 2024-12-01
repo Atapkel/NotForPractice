@@ -34,72 +34,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.SearchRoutes
+import com.example.androidfinalproject.presentation.search.components.MovieCard1
+import com.example.androidfinalproject.presentation.search.components.SearchBar
+import kotlinx.coroutines.delay as delay
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SearchBar(
-    navController: NavHostController,
-    query: String,
-    onQueryChange: (String) -> Unit,
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .background(color = Color(0x66B5B5C9), shape = RoundedCornerShape(size = 56.dp))
-                .padding(horizontal = 16.dp)
 
-        ) {
-            Spacer(modifier = Modifier.width(8.dp))
-            Image(
-                painter = painterResource(id = R.drawable.search_icon),
-                contentDescription = "image description",
-                colorFilter = ColorFilter.tint(color = Color.Gray),
-                modifier = Modifier.size(16.dp)
-            )
-            TextField(
-                value = query,
-                onValueChange = onQueryChange,
-                placeholder = {
-                    Text(text = "Фильмы, актёры, режиссёры", color = Color.Gray)
-                },
-                singleLine = true,
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    cursorColor = Color.Gray
-                ),
-                modifier = Modifier.weight(1f)
-            )
-            Box(
-                Modifier
-                    .width(1.dp)
-                    .height(16.dp)
-                    .background(color = Color(0xFF838390))
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Image(
-                painter = painterResource(R.drawable.filter),
-                contentDescription = "",
-                modifier = Modifier
-                    .size(20.dp)
-                    .clickable {
-                        Log.d("filter_nav", "in filter clickable")
-                        navController.navigate(SearchRoutes.FILTER)
-                    }
-            )
-        }
-    }
-}
 
 @Composable
 fun SearchScreen(navController: NavHostController) {
@@ -122,39 +72,66 @@ fun SearchScreen(navController: NavHostController) {
                 viewModel.searchFilm(newValue)
             }
         )
-    }
 
-    when (state) {
-        is SearchState.Initial -> {
-            // Initial state, maybe show nothing
-        }
 
-        is SearchState.Loading -> {
-            // Show loading indicator
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator(color = Color(0xFF3D3BFF))
+        when (state) {
+            is SearchState.Initial -> {
             }
-        }
 
-        is SearchState.Success -> {
-            LazyColumn {
-                items((state as SearchState.Success).films) { film ->
-                    Text(film.nameRu ?: "Unknown Title")
+            is SearchState.Loading -> {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator(color = Color(0xFF3D3BFF))
                 }
             }
-        }
 
-        is SearchState.Error -> {
-            // Show error message
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            is SearchState.Success -> {
+                LazyColumn (
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.padding(top = 24.dp)
+                ){
+                    items((state as SearchState.Success).films) { film ->
+                        MovieCard1(
+                            filmS = film,
+                            navController = navController
+                        )
+                    }
+                }
+            }
+
+            is SearchState.Error -> {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    if ((state as SearchState.Error).message == "No films found") {
+                        Text(
+                            text = "К сожалению, по вашему запросу  ничего не найдено",
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontFamily = FontFamily(Font(R.font.graphik_medium)),
+                                fontWeight = FontWeight(500),
+                                color = Color(0xFF272727),
+                                textAlign = TextAlign.Center,
+                            )
+                        )
+                    }else{
+                        Text(
+                            text = "Failed to load data",
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontFamily = FontFamily(Font(R.font.graphik_medium)),
+                                fontWeight = FontWeight(500),
+                                color = Color(0xFF272727),
+                                textAlign = TextAlign.Center,
+                            )
+                        )
+                    }
+                }
             }
         }
     }
