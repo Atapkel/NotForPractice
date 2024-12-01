@@ -12,9 +12,13 @@ interface MovieDAO {
     @Upsert
     suspend fun upsertMovie(movieDTO: MovieDTO)
 
-    @Query("DELETE  FROM MovieDTO where id>0")
-    fun delete()
-
     @Query("SELECT * FROM MovieDTO")
     fun getMovies(): Flow<List<MovieDTO>>
+
+    @Query("SELECT * FROM MovieDTO WHERE collectionName=:collectionName")
+    fun getMoviesByCollectionName(collectionName: String): Flow<List<MovieDTO>>
+
+    @Query("DELETE FROM MOVIEDTO where collectionName=:collectionName")
+    fun delete(collectionName: String)
+
 }

@@ -17,9 +17,11 @@ import kotlinx.coroutines.launch
 class ProfileScreenViewModel(
     private val dao: MovieDAO
 ) : ViewModel() {
+
     private val _state = MutableStateFlow(MovieState())
     private val _movies = dao.getMovies()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
     val state = combine(_state, _movies) { state, movies ->
         state.copy(movies = movies)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), MovieState())
@@ -31,7 +33,6 @@ class ProfileScreenViewModel(
             }
 
 
-
             MovieEvent.ShowMovie -> {
                 _state.update {
                     it.copy(isAddingMovie = true)
@@ -39,7 +40,9 @@ class ProfileScreenViewModel(
             }
 
             is MovieEvent.DeleteMovie -> {
-                viewModelScope.launch { dao.delete() }
+                viewModelScope.launch {
+                    println("Delete it from viewModel ${event.collectionName}")
+                    dao.delete(event.collectionName) }
             }
 
             is MovieEvent.SaveMovie -> {
@@ -52,6 +55,8 @@ class ProfileScreenViewModel(
                     }
                 }
             }
+
+            is MovieEvent.FindByCollectionName -> TODO()
         }
     }
 }
