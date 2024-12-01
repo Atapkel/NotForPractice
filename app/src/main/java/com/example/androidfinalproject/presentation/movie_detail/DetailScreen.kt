@@ -20,9 +20,10 @@ import com.example.androidfinalproject.domain.model.ActorByFilm
 import com.example.androidfinalproject.domain.model.ImageOfFilm
 import com.example.androidfinalproject.domain.model.SimilarFilm
 import com.example.androidfinalproject.presentation.movie_detail.component.DetailScreenOfMovie
+import com.example.androidfinalproject.presentation.profile.ProfileScreenViewModel
 
 @Composable
-fun DetailScreen(id: Int, path: (String) -> Unit) {
+fun DetailScreen(id: Int, path: (String) -> Unit, viewModelProfile: ProfileScreenViewModel) {
     val viewModel: DetailScreenViewModel = remember { DetailScreenViewModel(id) }
 
     when (val state = viewModel.stateOfMovieDetail) {
@@ -74,7 +75,7 @@ fun DetailScreen(id: Int, path: (String) -> Unit) {
                                     val movie: Movie = state.movies;
                                     val images: List<ImageOfFilm> = stateOfImages.images;
                                     val similars: List<SimilarFilm> = stateSimilar.similarFilms
-                                    DetailScreenOfMovie(stuffs = actors, movie = movie, images = images, similar = similars, path)
+                                    DetailScreenOfMovie(stuffs = actors, movie = movie, images = images, similar = similars, path,viewModel = viewModelProfile)
                                 }
                             }
 

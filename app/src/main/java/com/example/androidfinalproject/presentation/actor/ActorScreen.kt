@@ -1,4 +1,4 @@
-package com.example.androidfinalproject.presentation.actor
+    package com.example.androidfinalproject.presentation.actor
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

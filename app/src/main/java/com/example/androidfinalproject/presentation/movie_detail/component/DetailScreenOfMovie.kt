@@ -38,10 +38,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.androidfinalproject.R
+import com.example.androidfinalproject.domain.dto.MovieDTO
 import com.example.androidfinalproject.domain.model.ActorByFilm
 import com.example.androidfinalproject.domain.model.ImageOfFilm
 import com.example.androidfinalproject.domain.model.SimilarFilm
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
+import com.example.androidfinalproject.presentation.profile.ProfileScreenViewModel
+import com.example.androidfinalproject.presentation.profile.event.MovieEvent
+import com.example.androidfinalproject.presentation.profile.event.MovieState
 
 
 private val gradient = Brush.verticalGradient(
@@ -59,7 +63,8 @@ fun DetailScreenOfMovie(
     movie: Movie,
     images: List<ImageOfFilm>,
     similar: List<SimilarFilm>,
-    path: (String) -> Unit
+    path: (String) -> Unit,
+    viewModel: ProfileScreenViewModel
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
@@ -164,8 +169,49 @@ fun DetailScreenOfMovie(
                         Modifier.padding(top = 10.dp),
                         horizontalArrangement = Arrangement.spacedBy(17.dp)
                     ) {
-                        Image(contentDescription = "", painter = painterResource(R.drawable.liked), modifier = Modifier.clickable {  })
-                        Image(contentDescription = "", painter = painterResource(R.drawable.saved), modifier = Modifier.clickable {  })
+                        Image(contentDescription = "", painter = painterResource(R.drawable.liked), modifier = Modifier.clickable {
+
+                            println("Liked movie saved")
+                            val movieDTO = MovieDTO(
+                                collectionName = "liked",
+                                posterUrl = movie.posterUrl ?: "",
+                                ratingKinopoisk = movie.ratingKinopoisk?.toString() ?: "0.0",
+                                nameRu = movie.nameRu ?: "Unknown Title",
+                                nameEn = movie.nameEn ?: "Unknown Title",
+                                genres = movie.genres.firstOrNull()?.genre ?: "Unknown Genre",
+                                year = movie.year ?: 0,
+                                filmLength = movie.filmLength ?: 0,
+                                ratingAgeLimits = movie.ratingAgeLimits ?: "0+",
+                                countries = movie.countries.firstOrNull()?.country ?: "Unknown Country",
+                                shortDescription = (movie.shortDescription ?: "No description available.") + ".",
+                                description = movie.description ?: "No detailed description available."
+                            )
+
+                            viewModel.onEvent(MovieEvent.SaveMovie(movieDTO))
+                            println("Liked movie saved")
+
+                        })
+                        Image(contentDescription = "", painter = painterResource(R.drawable.saved), modifier = Modifier.clickable {
+                            println("Saved movie saved")
+                            val movieDTO = MovieDTO(
+                                collectionName = "saved",
+                                posterUrl = movie.posterUrl ?: "",
+                                ratingKinopoisk = movie.ratingKinopoisk?.toString() ?: "0.0",
+                                nameRu = movie.nameRu ?: "Unknown Title",
+                                nameEn = movie.nameEn ?: "Unknown Title",
+                                genres = movie.genres.firstOrNull()?.genre ?: "Unknown Genre",
+                                year = movie.year ?: 0,
+                                filmLength = movie.filmLength ?: 0,
+                                ratingAgeLimits = movie.ratingAgeLimits ?: "0+",
+                                countries = movie.countries.firstOrNull()?.country ?: "Unknown Country",
+                                shortDescription = (movie.shortDescription ?: "No description available.") + ".",
+                                description = movie.description ?: "No detailed description available."
+                            )
+
+                            viewModel.onEvent(MovieEvent.SaveMovie(movieDTO))
+
+                            println("Saved movie saved")
+                        })
                         Image(contentDescription = "", painter = painterResource(R.drawable.isseen), modifier = Modifier.clickable {  })
                         Image(contentDescription = "", painter = painterResource(R.drawable.share), modifier = Modifier.clickable {  })
                         Image(

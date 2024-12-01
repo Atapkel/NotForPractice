@@ -12,9 +12,12 @@ import com.example.androidfinalproject.presentation.genre.GenreScreen
 import com.example.androidfinalproject.presentation.movie_detail.DetailScreen
 import com.example.androidfinalproject.presentation.home.HomeScreen
 import com.example.androidfinalproject.presentation.movie_detail.component.FilmImage
-import com.example.androidfinalproject.presentation.movie_detail.component.FilmImagesScreen
+import com.example.androidfinalproject.presentation.profile.ProfileScreenViewModel
 
-fun NavGraphBuilder.homeGraph(navController: NavHostController) {
+fun NavGraphBuilder.homeGraph(navController: NavHostController, viewModel: ProfileScreenViewModel) {
+
+
+
     navigation(route = BottomNavigationItem.Home.route, startDestination = HomeRoutes.HOME_MAIN) {
         composable(route = HomeRoutes.HOME_MAIN) {
             HomeScreen(path = { route -> navController.navigate(route) })
@@ -33,7 +36,7 @@ fun NavGraphBuilder.homeGraph(navController: NavHostController) {
                 } else {
                     navController.navigate(route)
                 }
-            })
+            }, viewModelProfile = viewModel)
         }
         composable(route = HomeRoutes.HOME_SEE_ALL + "/{type}",
             arguments = listOf(

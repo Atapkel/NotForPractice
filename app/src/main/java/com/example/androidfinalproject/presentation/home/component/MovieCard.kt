@@ -81,7 +81,8 @@ fun MovieCard(
             text = movie.nameOriginal.toString(),
             fontFamily = FontFamily(Font(R.font.graphik_regular)),
             fontSize = 14.sp,
-            color = Color(0xFF272727)
+            color = Color(0xFF272727),
+            modifier = Modifier.height(15.dp)
         )
         Spacer(Modifier.height(2.dp))
         Text(

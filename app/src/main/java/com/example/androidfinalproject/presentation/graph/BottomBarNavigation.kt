@@ -14,13 +14,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.BottomNavigationItem
+import com.example.androidfinalproject.presentation.profile.ProfileScreenViewModel
 
 
 @Composable
-fun BottomBarNavigation(navController: NavHostController = rememberNavController()) {
+fun BottomBarNavigation(navController: NavHostController = rememberNavController(), viewModel: ProfileScreenViewModel) {
     Scaffold(bottomBar = { BottomBar(navController) })
     { paddingValues ->
-        BottomBarGraph(navController = navController, paddingValues)
+        BottomBarGraph(navController = navController, paddingValues, viewModel)
     }
 }
 

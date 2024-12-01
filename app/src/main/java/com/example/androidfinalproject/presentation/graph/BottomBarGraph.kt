@@ -7,24 +7,28 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.androidfinalproject.MainActivity
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.BottomNavigationItem
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.homeGraph
 import com.example.androidfinalproject.presentation.profile.ProfileScreen
+import com.example.androidfinalproject.presentation.profile.ProfileScreenViewModel
 import com.example.androidfinalproject.presentation.search.SearchScreen
 
 
 @Composable
-fun BottomBarGraph(navController: NavHostController, paddingValues: PaddingValues) {
+fun BottomBarGraph(navController: NavHostController, paddingValues: PaddingValues, viewModel: ProfileScreenViewModel) {
+
+
     NavHost(
         navController = navController,
         route = Routes.BottomBar.route,
         startDestination = BottomNavigationItem.Home.route,
         modifier = Modifier.padding(paddingValues)
     ) {
-        homeGraph(navController)
+        homeGraph(navController, viewModel)
 
         composable(route = BottomNavigationItem.Profile.route) {
-            ProfileScreen()
+            ProfileScreen(viewModel)
         }
 
         composable(route = BottomNavigationItem.Search.route) {
