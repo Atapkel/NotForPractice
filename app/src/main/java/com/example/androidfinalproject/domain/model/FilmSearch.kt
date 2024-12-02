@@ -15,14 +15,10 @@ data class FilmS(
     val year: String?,
     val description: String?,
     val filmLength: String?,
-    val countries: List<CountryS>,
-    val genres: List<GenreS>,
+    val countries: List<Country>,
+    val genres: List<Genre>,
     val rating: String?,
     val ratingVoteCount: Int?,
     val posterUrl: String?,
     val posterUrlPreview: String?
 )
-
-data class CountryS(val country: String)
-data class GenreS(val genre: String)
-

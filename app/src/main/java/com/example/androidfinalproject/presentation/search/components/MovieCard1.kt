@@ -34,12 +34,14 @@ import coil.compose.AsyncImage
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.model.FilmS
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.HomeRoutes
+import com.example.androidfinalproject.presentation.search.FilmItem
 
 @Composable
 fun MovieCard1(
-    filmS: FilmS,
+    filmS: FilmItem,
     navController: NavController
 ){
+
     Row(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -87,7 +89,7 @@ fun MovieCard1(
         }
         Column (verticalArrangement = Arrangement.spacedBy(4.dp)){
             Text(
-                text = filmS.nameRu.toString(),
+                text = filmS.nameRu,
                 style = TextStyle(
                     fontSize = 14.sp,
                     fontFamily = FontFamily(Font(R.font.graphik_medium)),

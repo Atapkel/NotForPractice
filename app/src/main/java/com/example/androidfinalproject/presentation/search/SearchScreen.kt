@@ -1,28 +1,16 @@
 package com.example.androidfinalproject.presentation.search
 
+import FilteredMoviesState
+import FilteredMoviesViewModel
 import android.util.Log
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -32,8 +20,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -44,22 +30,47 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.androidfinalproject.R
-import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.SearchRoutes
 import com.example.androidfinalproject.presentation.search.components.MovieCard1
 import com.example.androidfinalproject.presentation.search.components.SearchBar
-import kotlinx.coroutines.delay as delay
-
 
 
 @Composable
-fun SearchScreen(navController: NavHostController) {
+fun SearchScreen(navController: NavHostController, filtersViewModel: FilmFiltersViewModel) {
     val viewModel: SearchViewModel = viewModel()
     val state by viewModel.state.collectAsState()
+
+
+    val newFilteredMoviesViewModel: FilteredMoviesViewModel = viewModel()
+    val filteredState by newFilteredMoviesViewModel.movieState.collectAsState()
+
     var keyword by remember { mutableStateOf("") }
 
+    val typeBy = mapOf(
+        "Фильмы" to "FILM",
+        "Сериалы" to "TV_SERIES",
+        "Все" to "ALL"
+    )
+    val sortBy = mapOf(
+        "Рейтинг" to "RATING",
+        "Популярность" to "NUM_VOTE",
+        "Дата" to "YEAR"
+    )
+    val selectedType = filtersViewModel.selectedType.collectAsState().value
+    val selectedSort = filtersViewModel.selectedSort.collectAsState().value
+    val selectedCountry = filtersViewModel.selectedCountryId.collectAsState().value
+    val selectedGenre = filtersViewModel.selectedGenreId.collectAsState().value
+    val toYear = filtersViewModel.toYear.collectAsState().value
+    val fromYear = filtersViewModel.fromYear.collectAsState().value
+    val startRating = filtersViewModel.startRating.collectAsState().value
+    val endRating = filtersViewModel.endRating.collectAsState().value
+    val type = typeBy[selectedType] ?: "ALL"
+    val sort = sortBy[selectedSort] ?: "YEAR"
+    Log.d(
+        "filtered_search",
+        "$selectedCountry, $selectedGenre, $toYear, $fromYear, $startRating, $endRating, $type, $sort "
+    )
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
             .padding(26.dp)
@@ -69,11 +80,83 @@ fun SearchScreen(navController: NavHostController) {
             query = keyword,
             onQueryChange = { newValue ->
                 keyword = newValue
-                viewModel.searchFilm(newValue)
+                if (keyword.isNotBlank() && selectedCountry != 0 && selectedGenre != 0 && toYear != 0 && fromYear != 0
+                    && startRating != 0.0 && endRating != 10.0 && sort != "YEAR" && type != "ALL"
+                ) {
+                    viewModel.searchFilm(newValue)
+                } else {
+                    newFilteredMoviesViewModel.getFilteredMovies(
+                        country = selectedCountry,
+                        genre = selectedGenre,
+                        order = sort,
+                        type = type,
+                        ratingFrom = startRating,
+                        ratingTo = endRating,
+                        yearFrom = fromYear,
+                        yearTo = toYear,
+                        keyword = keyword
+                    )
+
+                }
             }
         )
+        when (filteredState) {
+            is FilteredMoviesState.Error -> {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    val errorMessage = (state as SearchState.Error).message
+                    Text(
+                        text = if (errorMessage == "No films found") {
+                            "К сожалению, по вашему запросу ничего не найдено"
+                        } else {
+                            "failed to load data"
+                        },
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.graphik_medium)),
+                            fontWeight = FontWeight(500),
+                            color = Color(0xFF272727),
+                            textAlign = TextAlign.Center,
+                        )
+                    )
+                }
+            }
 
+            FilteredMoviesState.Initial -> {
 
+            }
+
+            FilteredMoviesState.Loading -> {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator(color = Color(0xFF3D3BFF))
+                }
+            }
+
+            is FilteredMoviesState.Success -> {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.padding(top = 24.dp)
+                ) {
+                    items((filteredState as FilteredMoviesState.Success).movies) { film ->
+                        val item = FilmItem(
+                            film.nameRu, film.kinopoiskId,
+                            film.ratingKinopoisk.toString(),
+                            film.posterUrl, film.year.toString(), film.genres
+                        )
+                        MovieCard1(filmS = item, navController = navController)
+                    }
+                }
+            }
+
+            else -> {}
+        }
         when (state) {
             is SearchState.Initial -> {
             }
@@ -89,15 +172,16 @@ fun SearchScreen(navController: NavHostController) {
             }
 
             is SearchState.Success -> {
-                LazyColumn (
+                LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier.padding(top = 24.dp)
-                ){
+                ) {
                     items((state as SearchState.Success).films) { film ->
-                        MovieCard1(
-                            filmS = film,
-                            navController = navController
+                        val item = FilmItem(
+                            film.nameRu.toString(), film.filmId, film.rating,
+                            film.posterUrl.toString(), film.year, film.genres
                         )
+                        MovieCard1(filmS = item, navController = navController)
                     }
                 }
             }
@@ -108,29 +192,21 @@ fun SearchScreen(navController: NavHostController) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    if ((state as SearchState.Error).message == "No films found") {
-                        Text(
-                            text = "К сожалению, по вашему запросу  ничего не найдено",
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                                fontWeight = FontWeight(500),
-                                color = Color(0xFF272727),
-                                textAlign = TextAlign.Center,
-                            )
+                    val errorMessage = (state as SearchState.Error).message
+                    Text(
+                        text = if (errorMessage == "No films found") {
+                            "К сожалению, по вашему запросу ничего не найдено"
+                        } else {
+                            "Failed to load data"
+                        },
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(R.font.graphik_medium)),
+                            fontWeight = FontWeight(500),
+                            color = Color(0xFF272727),
+                            textAlign = TextAlign.Center,
                         )
-                    }else{
-                        Text(
-                            text = "Failed to load data",
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                fontFamily = FontFamily(Font(R.font.graphik_medium)),
-                                fontWeight = FontWeight(500),
-                                color = Color(0xFF272727),
-                                textAlign = TextAlign.Center,
-                            )
-                        )
-                    }
+                    )
                 }
             }
         }

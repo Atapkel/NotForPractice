@@ -19,7 +19,7 @@ class Repository {
         return RetrofitInstance.api.getFilmDetailById(id)
     }
 
-    suspend fun getFilmActors(filmId: Int): Response<List<ActorByFilm>>{
+    suspend fun getFilmActors(filmId: Int): Response<List<ActorByFilm>> {
         return RetrofitInstance.api.getFilmActors(filmId)
     }
 
@@ -37,5 +37,31 @@ class Repository {
 
     suspend fun searchFilms(keyword: String): Response<FilmSearch> {
         return RetrofitInstance.api.searchFilms(keyword)
+    }
+
+    suspend fun getFilteredMovies(
+        country: Int,
+        genre: Int,
+        order: String,
+        type: String,
+        ratingFrom: Double,
+        ratingTo: Double,
+        yearFrom: Int,
+        yearTo: Int,
+        keyword: String,
+        page:Int = 1
+    ): Response<MovieResponse> {
+        return RetrofitInstance.api.getFilteredMovies(
+            country,
+            genre,
+            order,
+            type,
+            ratingFrom,
+            ratingTo,
+            yearFrom,
+            yearTo,
+            keyword,
+            page
+        )
     }
 }

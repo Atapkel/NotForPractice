@@ -7,22 +7,27 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.androidfinalproject.MainActivity
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.BottomNavigationItem
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.SearchRoutes
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.homeGraph
-import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.profileGraph
-import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.searchGraph
 import com.example.androidfinalproject.presentation.profile.ProfileScreen
 import com.example.androidfinalproject.presentation.profile.ProfileScreenViewModel
-import com.example.androidfinalproject.presentation.search.FilterScreen
+import com.example.androidfinalproject.presentation.search.CountryScreen
+import com.example.androidfinalproject.presentation.search.FilmFiltersViewModel
+import com.example.androidfinalproject.presentation.search.FilterGenreScreen
 import com.example.androidfinalproject.presentation.search.SearchScreen
+import com.example.androidfinalproject.presentation.search.components.DataPage
+import com.example.androidfinalproject.presentation.search.components.FilterPage
 
 
 @Composable
-fun BottomBarGraph(navController: NavHostController, paddingValues: PaddingValues, viewModel: ProfileScreenViewModel) {
+fun BottomBarGraph(
+    navController: NavHostController,
+    paddingValues: PaddingValues,
+    viewModel: ProfileScreenViewModel
+) {
 
-
+    val filtersViewModel = FilmFiltersViewModel()
     NavHost(
         navController = navController,
         route = Routes.BottomBar.route,
@@ -34,12 +39,21 @@ fun BottomBarGraph(navController: NavHostController, paddingValues: PaddingValue
             ProfileScreen(viewModel)
         }
         composable(route = BottomNavigationItem.Search.route) {
-            SearchScreen(navController)
+            SearchScreen(navController, filtersViewModel)
         }
-//        IT SHOULD BE LIKE THIS searchGraph -> composable(FilterScreen)
+//        IT SHOULD BE IN searchGraph
         composable(route = SearchRoutes.FILTER) {
-            FilterScreen(navController)
+            FilterPage(navController, filtersViewModel)
         }
-
+        composable(route = SearchRoutes.COUNTRY) {
+            CountryScreen(navController, filtersViewModel)
+        }
+        composable(route = SearchRoutes.GENRE) {
+            FilterGenreScreen(navController, filtersViewModel)
+        }
+        composable(route = SearchRoutes.DATE) {
+            DataPage(navController, filtersViewModel)
+        }
     }
 }
+
