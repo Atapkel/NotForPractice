@@ -7,7 +7,7 @@ sealed interface MovieEvent {
     data class SaveMovie(val movieDTO: MovieDTO) : MovieEvent
     object ShowMovie : MovieEvent
     object HideMovie : MovieEvent
-    object DeleteMovie : MovieEvent
-
+    data class DeleteMovie(val collectionName: String) : MovieEvent
+    data class FindByCollectionName(val collectionName: String): MovieEvent
 
 }

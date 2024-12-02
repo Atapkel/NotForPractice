@@ -41,8 +41,7 @@ fun SearchBar(
 ) {
     Box(
         modifier = Modifier
-            .fillMaxWidth(),
-        contentAlignment = Alignment.Center
+            .fillMaxWidth()
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -86,6 +85,7 @@ fun SearchBar(
                 modifier = Modifier
                     .size(20.dp)
                     .clickable {
+                        Log.d("filter_nav", "in filter clickable")
                         navController.navigate(SearchRoutes.FILTER)
                     }
             )

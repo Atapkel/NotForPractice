@@ -2,6 +2,7 @@ package com.example.androidfinalproject.presentation.profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,52 +41,50 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.domain.dto.MovieDTO
+import com.example.androidfinalproject.presentation.graph.ProfileRoutes
 import com.example.androidfinalproject.presentation.movie_detail.DetailScreenViewModel
 import com.example.androidfinalproject.presentation.profile.event.MovieEvent
 import com.example.androidfinalproject.presentation.profile.event.MovieState
 
 @Composable
-fun ProfileScreen(viewModel: ProfileScreenViewModel) {
-    val state = viewModel.state.collectAsState().value
-    val movies = state.movies
+fun ProfileScreen(viewModel: ProfileScreenViewModel, path: (String) -> Unit) {
+    Collections(viewModel = viewModel, path)
 
 
-    if (movies.isEmpty()) {
-        Text("No movies saved yet.")
-    } else {
-        LazyColumn {
-            items(movies) { movie ->
-                MovieItem(movie = movie)
-            }
-        }
-    }
-    Button(onClick = {
-        println("delete button clicked")
-        viewModel.onEvent(MovieEvent.DeleteMovie)
-    }) {
-        Text("DELETE ALL")
-    }
-}
-
-@Composable
-fun MovieItem(movie: MovieDTO) {
-    Column(modifier = Modifier.padding(16.dp)) {
-        Text(text = "Name: ${movie.nameRu} (${movie.year})")
-        Text(text = "Genres: ${movie.genres}")
-        Text(text = "Rating: ${movie.ratingKinopoisk}")
-        Text(text = "Description: ${movie.shortDescription}")
-
-
-    }
+//    if (movies.isEmpty()) {
+//        Text("No movies saved yet.")
+//    } else {
+//        LazyColumn {
+//            items(movies) { movie ->
+//                MovieItem(movie = movie)
+//            }
+//        }
+//    }
+//    Button(onClick = {
+//        println("delete button clicked")
+//        viewModel.onEvent(MovieEvent.DeleteMovie)
+//    }) {
+//        Text("DELETE ALL")
+//    }
 }
 
 
 //@Preview(showBackground = true)
 @Composable
-fun Collections() {
+fun Collections(viewModel: ProfileScreenViewModel, path: (String) -> Unit) {
+    val state = viewModel.state.collectAsState().value
+    val movies = state.movies
+    val likedMovies = mutableListOf<MovieDTO>()
+    val savedMovies = mutableListOf<MovieDTO>()
+    for (movie in movies) {
+        if (movie.collectionName.equals("liked")) likedMovies.add(movie)
+        else if (movie.collectionName.equals("saved")) savedMovies.add(movie)
+        else println("unknown collection of movie")
+    }
+
     var list = listOf(
-        Colllection("Любимые", R.drawable.liked, 10),
-        Colllection("Хочу посмотреть", R.drawable.saved, 20)
+        Colllection("Любимые", R.drawable.liked, likedMovies),
+        Colllection("Хочу посмотреть", R.drawable.saved, savedMovies)
     )
     Column(
         modifier = Modifier
@@ -112,21 +111,28 @@ fun Collections() {
 //            contentPadding = PaddingValues(8.dp)
         ) {
             items(list) { collection ->
-                ColllectionCard(collection)
+                ColllectionCard(collection, path)
             }
         }
     }
 }
 
-data class Colllection(val title: String, val iconId: Int, val count: Int)
+data class Colllection(val title: String, val iconId: Int, val movies: List<MovieDTO>)
 
 @Composable
-fun ColllectionCard(collection: Colllection) {
+fun ColllectionCard(collection: Colllection, path: (String) -> Unit) {
     Box(
         modifier = Modifier
             .padding(8.dp)
             .border(1.dp, Color.Black, shape = RoundedCornerShape(8.dp))
             .size(146.dp)
+            .clickable {
+//                println("navigated to ${collection.title}")
+                var collectionName = ""
+                if (collection.title.equals("Любимые"))collectionName = "liked"
+                else collectionName = "saved"
+                path(ProfileRoutes.MOVIES_BY_TYPE+"/${collectionName}")
+            }
     ) {
         Column(
             modifier = Modifier
@@ -161,7 +167,7 @@ fun ColllectionCard(collection: Colllection) {
                     .padding(start = 8.dp, top = 4.dp, end = 8.dp, bottom = 4.dp)
             ) {
                 Text(
-                    text = "${collection.count}",
+                    text = "${collection.movies.size}",
                     style = TextStyle(
                         fontSize = 8.sp,
                         fontFamily = FontFamily(Font(R.font.graphik_medium)),
