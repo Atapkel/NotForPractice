@@ -1,0 +1,531 @@
+[33mcommit 3118f0a10b498e23fbd52d7786c0442e765614e3[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Wed Dec 4 17:44:16 2024 +0500
+
+    hgf
+
+[33mcommit d0d3eac1445f876ea2ca6c25541a0c454740de1e[m
+Merge: cd6cd46 33e13f2
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Mon Dec 2 23:52:37 2024 +0500
+
+    need optimization for search logic
+
+[33mcommit cd6cd463c5ebbe9e0567a7bdbc009aa5fb37ce28[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Mon Dec 2 23:45:15 2024 +0500
+
+    filter is done, but need optimization for search(it crushes after 2 pressed letter)
+
+[33mcommit 33e13f2d24ab783c007b0dab9122e8be090fdaa3[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Sun Dec 1 19:19:57 2024 +0500
+
+    ui is ready
+
+[33mcommit b324c5a9d9ff096fd42626df04c5667a5f4e9004[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Sun Dec 1 19:09:55 2024 +0500
+
+    ui for room added
+
+[33mcommit 79c51cbe10109a61625c87c11dfb5c2fa8c722e4[m
+Merge: e2f5079 5a03de3
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Sun Dec 1 18:31:11 2024 +0500
+
+    test
+
+[33mcommit e2f50793d55054d1dca1c9fedd280fdac64a6c35[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Sun Dec 1 18:30:38 2024 +0500
+
+    issues with searchGraph
+
+[33mcommit 5a03de37cd311caa821a95623691cbb9506a0b55[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Sun Dec 1 18:29:08 2024 +0500
+
+    seach updated
+
+[33mcommit f7917aea308f9176136130cbce881a788ba4bd24[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Sun Dec 1 17:20:09 2024 +0500
+
+    search field is done
+
+[33mcommit 97b98f8077e8ccf55f9acf357cd562eefbde02af[m
+Merge: ba2e240 161d08b
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Sun Dec 1 14:10:59 2024 +0500
+
+    test
+
+[33mcommit ba2e240254dc6a1d67777023bf6d92452c0efa4c[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Sun Dec 1 14:10:35 2024 +0500
+
+    test
+
+[33mcommit 161d08b1cbbf04ff9b55ab2fa1e516028ccf41b8[m
+Merge: 94a81dd 74478b5
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Sun Dec 1 00:25:48 2024 +0500
+
+    ROOM ADDED SUCCESSFULLY! UI-kaldy
+
+[33mcommit 94a81dda388f19393cc1149ed07d1ba6d70b0805[m
+Merge: cfe5bfd 3478998
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Sat Nov 30 18:30:06 2024 +0500
+
+    starting
+
+[33mcommit 74478b541702202f5373d05796f5446145e1156b[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Sat Nov 30 17:54:11 2024 +0500
+
+    search
+
+[33mcommit cfe5bfd780722323aa39188ae0fdebbec095f780[m
+Merge: 97d1c70 937745f
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Sat Nov 30 17:40:49 2024 +0500
+
+    somechanges
+
+[33mcommit 3478998bad4eae2fb1b483b2ad0d44bc864a7234[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Fri Nov 29 21:31:32 2024 +0500
+
+    search
+
+[33mcommit 97d1c703f3516d67e64a8069b271e86d64e7f40d[m
+Merge: 8df441f 525ecc8
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Wed Nov 20 12:39:43 2024 +0500
+
+    some changes
+
+[33mcommit aa806d124a17b59a61fffd1c357d90c85e8edf43[m
+Merge: 27df9b0 937745f
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Mon Nov 18 18:37:47 2024 +0500
+
+    test
+
+[33mcommit 27df9b051b10e68f40b05e8b647f356499ed7540[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Mon Nov 18 18:34:52 2024 +0500
+
+    test
+
+[33mcommit 937745fdc5efbacf62dfaaa6c4cf66c4a27dcc86[m
+Author: Kenesbek Zangar <kenesbek.zangar@gmail.com>
+Date:   Mon Nov 18 17:57:40 2024 +0500
+
+    nav
+
+[33mcommit e04064ee9203b5e04bf00cc7c25a51c35d7bb886[m
+Author: Kenesbek Zangar <kenesbek.zangar@gmail.com>
+Date:   Mon Nov 18 17:45:48 2024 +0500
+
+    filmography updated
+
+[33mcommit 8df441faa0b33e964ba7e7a9a010710ed2dddcda[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Mon Nov 18 14:20:10 2024 +0500
+
+    changes
+
+[33mcommit 8aac2548e8da9239ef596d54c34a540332daac98[m
+Merge: 75f2d21 525ecc8
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Mon Nov 18 12:17:57 2024 +0500
+
+    test1
+
+[33mcommit 75f2d21f3b3691e302d3c14dfa58d535ae609ba1[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Mon Nov 18 12:17:02 2024 +0500
+
+    test1
+
+[33mcommit 525ecc8ce7d8cc0b22129335f5588b301247f421[m
+Author: Kenesbek Zangar <kenesbek.zangar@gmail.com>
+Date:   Mon Nov 18 10:03:04 2024 +0500
+
+    dew
+
+[33mcommit 5dba286c4f167ead5ace17d46f628e32b51598ff[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Sun Nov 17 17:01:49 2024 +0500
+
+    token updated
+
+[33mcommit d5bfe6600e4806c5728d332f7f9ceb53a3f6c464[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Sat Nov 16 11:51:03 2024 +0500
+
+    Actor page done
+
+[33mcommit 7f173aeaebc21323f7ceda14aa43906fb82ecfc9[m
+Merge: 10a7bc5 101a9b2
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Fri Nov 15 22:16:01 2024 +0500
+
+    test4
+
+[33mcommit 10a7bc539fb7da0fbad9e1fa2558bf6da870ef11[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Fri Nov 15 22:15:02 2024 +0500
+
+    test3
+
+[33mcommit 101a9b24436be596f98c08e87c2941ece91cb930[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Fri Nov 15 21:22:52 2024 +0500
+
+    actor page stage4
+
+[33mcommit 9e37efaeb7929e773682fc94b18910edbaa8dc32[m
+Merge: 9cbd0e6 b47ba64
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Fri Nov 15 21:13:04 2024 +0500
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/java/com/example/androidfinalproject/presentation/movie_detail/component/DetailScreenOfMovie.kt
+
+[33mcommit 9cbd0e64d95b1d7f9c676d77a6f89f74a8b575fe[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Fri Nov 15 21:11:41 2024 +0500
+
+    actor page stage3
+
+[33mcommit b47ba64c0a38d82ea127f67e7ce7957836c33df3[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Fri Nov 15 20:04:21 2024 +0500
+
+    [200~
+    
+    Fixed some issues and added optimization
+
+[33mcommit 2f2248f52d06e3365d325fafe6887e40847883dd[m
+Merge: 3af858f e9533a0
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Fri Nov 15 19:37:01 2024 +0500
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 3af858f2f88203135cb7f350dcb2ab630ae2d685[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Fri Nov 15 19:35:26 2024 +0500
+
+    actor page stage2
+
+[33mcommit e9533a03f9b3f9d8c9be72626deeababa3681d36[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Fri Nov 15 19:34:53 2024 +0500
+
+    film page done
+
+[33mcommit d31533564b7f46dc7c6f442fa142be55ea16e9cf[m
+Merge: 3d53ee7 a9086fb
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Thu Nov 14 19:17:14 2024 +0500
+
+    Film page almost done
+
+[33mcommit a9086fb1c401176206d2c3e75020f482eb6570c5[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Thu Nov 14 18:49:03 2024 +0500
+
+    actor page stage1
+
+[33mcommit 3d53ee7bdfc69d6fb054833df4162edf40817a2b[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Thu Nov 14 17:16:17 2024 +0500
+
+    Film page is ready
+
+[33mcommit b0714c5c6862c1765ca93fef0a00a7fb96255f7d[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Tue Nov 12 20:44:37 2024 +0500
+
+    changes
+
+[33mcommit 9c4930c3fcbb1194aee11055848bffcf7887dbd0[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Tue Nov 12 18:41:54 2024 +0500
+
+    ch
+
+[33mcommit c1b0ed1e8e92f0f843c7ab89a6db821f477961a3[m
+Merge: ddd9997 6c1b2f3
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Tue Nov 12 18:41:41 2024 +0500
+
+    try to pull
+
+[33mcommit ddd9997ff8df1492019b615c30aec2e9173fe175[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Tue Nov 12 18:04:08 2024 +0500
+
+    pre
+
+[33mcommit 6c1b2f36a3ee43d0ab336d6719df4556c1586abe[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Tue Nov 12 17:30:42 2024 +0500
+
+    fetch data actor, movie detail is works
+
+[33mcommit 4278fbf54017d04f10a4d95274a1024da43118df[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Tue Nov 12 17:24:34 2024 +0500
+
+    some changes
+
+[33mcommit 353583fc1fdbf85d47587ddd10bee30d14015934[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Tue Nov 12 16:48:00 2024 +0500
+
+    added fetching data of actors
+
+[33mcommit 539961b843bea51ce93d314eca66e25500651ab1[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Tue Nov 12 15:25:50 2024 +0500
+
+    detail movie added
+
+[33mcommit f3b6697f3c4dcf6b6537c559fdd24b2a3c9e6c7e[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Tue Nov 12 15:04:58 2024 +0500
+
+    worked version from ass3
+
+[33mcommit 95d6d594e84f32913e16ef25c88aca0678cc2204[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Tue Nov 12 14:37:12 2024 +0500
+
+    test
+
+[33mcommit 9b25e7701fce5d8feb3d1e2c085252b58471a131[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Tue Nov 12 14:19:48 2024 +0500
+
+    Corrected some details of navigation
+
+[33mcommit a1f0fce4c291414fea08bc4dc7ffed693a7c8e50[m
+Merge: 04a50de 591fdd3
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Fri Nov 1 22:54:16 2024 +0500
+
+    Merge branch 'master' of https://github.com/Atapkel/AndroidFinalProject
+
+[33mcommit 04a50de64124b5237b0f9691fd1279f309c5746a[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Fri Nov 1 22:54:10 2024 +0500
+
+    test
+
+[33mcommit 591fdd3f9e247256387f043a52d9ea5be2d4a747[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Fri Nov 1 22:49:25 2024 +0500
+
+    final commit
+
+[33mcommit f4b23a46a581dd2b6bb0e6e54a41a40d6190be81[m
+Merge: 68c4a2e 4457ca0
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Fri Nov 1 22:44:52 2024 +0500
+
+    test
+
+[33mcommit 68c4a2e4f6f49de8fbd9911f576f3c24475f77b4[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Fri Nov 1 22:43:47 2024 +0500
+
+    test
+
+[33mcommit 4457ca0b006caf7c845095767ca143568cf9feac[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Fri Nov 1 22:39:28 2024 +0500
+
+    State Screen added.
+
+[33mcommit c6a53a80e2a05e6c8656e3052569e08df690348a[m
+Merge: b077e77 89710b3
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Fri Nov 1 22:00:31 2024 +0500
+
+    Merge branch 'master' of https://github.com/Atapkel/AndroidFinalProject
+
+[33mcommit b077e77d57599e36e5a1202875ab6bfde468f5c0[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Fri Nov 1 21:59:12 2024 +0500
+
+    navigation added genre viewmodel added with out screen state
+
+[33mcommit 89710b33c61d797828f56949ecd4b3554cdcc9bc[m
+Merge: 163608e b411d14
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Fri Nov 1 21:50:55 2024 +0500
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 163608e542261f8cb8bd51e8e2f7020a351aff22[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Fri Nov 1 21:50:04 2024 +0500
+
+    test
+
+[33mcommit b411d1479744eecdd946d8451f75fce18bd022a5[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Fri Nov 1 21:46:37 2024 +0500
+
+    Genre viewModel added
+
+[33mcommit 1e769450d5e465556d32bc03501162d93290b2eb[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Fri Nov 1 21:40:56 2024 +0500
+
+    List Page and LazyVerticalGrid added
+
+[33mcommit ee77b83198b289ec63c249c22ac8a2a58a3d6890[m
+Merge: a224ba3 fb82fbf
+Author: Kenesbek Zangar <kenesbek.zangar@gmail.com>
+Date:   Fri Nov 1 21:29:39 2024 +0500
+
+    Data Api added
+
+[33mcommit a224ba355ae657497ee4b029f03f7130a1778123[m
+Author: Kenesbek Zangar <kenesbek.zangar@gmail.com>
+Date:   Fri Nov 1 21:01:51 2024 +0500
+
+    Changed configuration
+
+[33mcommit fb82fbf401ad51af76daeabdd15c124dc1e65d11[m
+Merge: b503f24 176dbed
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Fri Nov 1 20:59:23 2024 +0500
+
+    Errors changed
+
+[33mcommit b503f242ee58b30be5817538c572552c7c2c749d[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Fri Nov 1 20:55:15 2024 +0500
+
+    Errors changed for me
+
+[33mcommit 176dbed462c6ffbce69e5f2147999688b8921069[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Fri Nov 1 11:01:50 2024 +0500
+
+    Data from api
+
+[33mcommit 40a4e897ea18bd2e678d538f4ccb0c3ae80700bd[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Fri Nov 1 10:56:13 2024 +0500
+
+    Data from Api
+
+[33mcommit 3929fd72970a67cec5911325444c6039088a46ad[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Wed Oct 30 19:54:47 2024 +0500
+
+    home screen fixed
+
+[33mcommit de1349a220a1a2b3f09467f88bd6e2499baf43fa[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Wed Oct 30 19:50:16 2024 +0500
+
+    errors fixed
+
+[33mcommit 506f0751b912be601e23034c1a1972680ff6d3a3[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Wed Oct 30 19:47:09 2024 +0500
+
+    Graph added
+
+[33mcommit c3c9d9145b11b74645859e2807fb83ccdf4d4b87[m
+Merge: 8ad94c1 edc4b88
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Wed Oct 30 19:44:31 2024 +0500
+
+    home section added
+
+[33mcommit 8ad94c11e16aa1437e846a59ef81c1417fc54c43[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Wed Oct 30 19:43:15 2024 +0500
+
+    home screen added
+
+[33mcommit edc4b88976962dc1e61c3a524e137534d7473efe[m
+Author: Kenesbek Zangar <kenesbek.zangar@gmail.com>
+Date:   Wed Oct 30 19:33:06 2024 +0500
+
+    Domain model added
+
+[33mcommit 17a807292190985b74b3b733809912cbd41aa724[m
+Author: Kenesbek Zangar <kenesbek.zangar@gmail.com>
+Date:   Wed Oct 30 19:23:31 2024 +0500
+
+    Details added
+
+[33mcommit f8dd94548d9b0a64b10947dddf0e76d126d0c0fa[m
+Merge: 9b130d0 0346a5a
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Wed Oct 30 19:17:36 2024 +0500
+
+    added ui theme
+
+[33mcommit 9b130d035f814dea0e5cdd975a3f1905a1922da1[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Wed Oct 30 19:16:25 2024 +0500
+
+    Added ui theme
+
+[33mcommit 0346a5adc4d17ae7a86c54b580054eabb9752e56[m
+Author: shadowpr1est <alisher.arginbekov@mail.ru>
+Date:   Wed Oct 30 19:11:22 2024 +0500
+
+    changin version
+
+[33mcommit 99213e228c5cabd31c58b9b9b576e74c1e0af365[m
+Merge: 3b603c5 b282c1f
+Author: Kenesbek Zangar <kenesbek.zangar@gmail.com>
+Date:   Wed Oct 30 19:08:48 2024 +0500
+
+    change
+
+[33mcommit 3b603c54c309c20cb1217ad58e67d653cad5b059[m
+Author: Kenesbek Zangar <kenesbek.zangar@gmail.com>
+Date:   Wed Oct 30 19:07:19 2024 +0500
+
+    Added models
+
+[33mcommit b282c1f24385453d5bb5b5c5cee69b41c0076ee2[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Wed Oct 30 19:01:06 2024 +0500
+
+    package presentation added
+
+[33mcommit fa5c1180e0c7899eac28b8dde92df41ecf7f7089[m
+Author: Azat Gainolla <azatgainolla026@gmail.com>
+Date:   Wed Oct 30 18:48:31 2024 +0500
+
+    Resources added
+
+[33mcommit abb1a83019a97761b645011dd418791025f13ef7[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Mon Oct 28 13:24:20 2024 +0500
+
+    Added packages of home page
+
+[33mcommit b45ca966c8c9572fdd0c923e7bb4e7a18b70b7fa[m
+Author: Atapkel Beibarys <beibarysatapkel@gmail.com>
+Date:   Mon Oct 28 13:14:08 2024 +0500
+
+    Init of the project
