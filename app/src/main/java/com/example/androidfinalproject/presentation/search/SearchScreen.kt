@@ -66,10 +66,9 @@ fun SearchScreen(navController: NavHostController, filtersViewModel: FilmFilters
     val type = typeBy[selectedType] ?: "ALL"
     val sort = sortBy[selectedSort] ?: "YEAR"
     Log.d(
-        "filtered_search",
+        "filtersearch",
         "$selectedCountry, $selectedGenre, $toYear, $fromYear, $startRating, $endRating, $type, $sort "
     )
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -80,9 +79,7 @@ fun SearchScreen(navController: NavHostController, filtersViewModel: FilmFilters
             query = keyword,
             onQueryChange = { newValue ->
                 keyword = newValue
-                if (keyword.isNotBlank() && selectedCountry != 0 && selectedGenre != 0 && toYear != 0 && fromYear != 0
-                    && startRating != 0.0 && endRating != 10.0 && sort != "YEAR" && type != "ALL"
-                ) {
+                if (selectedCountry == 0 && selectedGenre == 0) {
                     viewModel.searchFilm(newValue)
                 } else {
                     newFilteredMoviesViewModel.getFilteredMovies(
@@ -96,7 +93,6 @@ fun SearchScreen(navController: NavHostController, filtersViewModel: FilmFilters
                         yearTo = toYear,
                         keyword = keyword
                     )
-
                 }
             }
         )

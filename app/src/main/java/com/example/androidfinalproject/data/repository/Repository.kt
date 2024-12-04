@@ -2,6 +2,7 @@ package com.example.androidfinalproject.data.repository
 
 import Movie
 import MovieResponse
+import android.util.Log
 import com.example.androidfinalproject.domain.model.Actor
 import com.example.androidfinalproject.domain.model.ActorByFilm
 import com.example.androidfinalproject.domain.model.FilmSearch
@@ -36,6 +37,9 @@ class Repository {
     }
 
     suspend fun searchFilms(keyword: String): Response<FilmSearch> {
+        Log.d("repository_logic", "starting API call with keyword: $keyword")
+        val response = RetrofitInstance.api.searchFilms(keyword)
+        Log.d("repository_logic", "received response with code: ${response.code()}")
         return RetrofitInstance.api.searchFilms(keyword)
     }
 
