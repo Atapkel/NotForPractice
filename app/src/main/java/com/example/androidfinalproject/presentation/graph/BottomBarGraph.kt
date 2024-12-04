@@ -14,6 +14,7 @@ import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.Bottom
 import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.homeGraph
 import com.example.androidfinalproject.presentation.profile.ListOfMoviesScreen
 import com.example.androidfinalproject.presentation.profile.MovieDetailSavedScreen
+import com.example.androidfinalproject.presentation.graph.bottomBarGraphs.searchGraph
 import com.example.androidfinalproject.presentation.profile.ProfileScreen
 import com.example.androidfinalproject.presentation.profile.ProfileScreenViewModel
 import com.example.androidfinalproject.presentation.search.SearchScreen
@@ -34,7 +35,6 @@ fun BottomBarGraph(
         modifier = Modifier.padding(paddingValues)
     ) {
         homeGraph(navController, viewModel)
-
         composable(route = BottomNavigationItem.Profile.route) {
             ProfileScreen(viewModel, path = { route -> navController.navigate(route) })
         }
@@ -70,9 +70,8 @@ fun BottomBarGraph(
                 }
             })
         }
-
         composable(route = BottomNavigationItem.Search.route) {
-//            SearchScreen()
+            SearchScreen(navController)
         }
 
     }
