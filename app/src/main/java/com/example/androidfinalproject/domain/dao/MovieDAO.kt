@@ -20,5 +20,4 @@ interface MovieDAO {
 
     @Query("DELETE FROM MOVIEDTO where collectionName=:collectionName")
     fun delete(collectionName: String)
-
 }

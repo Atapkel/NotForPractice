@@ -8,9 +8,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
-import com.example.androidfinalproject.data.local.RoomInstance
+import com.example.androidfinalproject.util.RoomInstance
 import com.example.androidfinalproject.presentation.graph.RootNavGraph
-import com.example.androidfinalproject.presentation.profile.ProfileScreen
 import com.example.androidfinalproject.presentation.profile.ProfileScreenViewModel
 
 

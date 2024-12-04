@@ -32,6 +32,7 @@ import androidx.navigation.NavHostController
 import com.example.androidfinalproject.R
 import com.example.androidfinalproject.presentation.search.components.MovieCard1
 import com.example.androidfinalproject.presentation.search.components.SearchBar
+import kotlinx.coroutines.delay
 
 
 @Composable
@@ -66,9 +67,10 @@ fun SearchScreen(navController: NavHostController, filtersViewModel: FilmFilters
     val type = typeBy[selectedType] ?: "ALL"
     val sort = sortBy[selectedSort] ?: "YEAR"
     Log.d(
-        "filtersearch",
+        "filtered_search",
         "$selectedCountry, $selectedGenre, $toYear, $fromYear, $startRating, $endRating, $type, $sort "
     )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -79,7 +81,8 @@ fun SearchScreen(navController: NavHostController, filtersViewModel: FilmFilters
             query = keyword,
             onQueryChange = { newValue ->
                 keyword = newValue
-                if (selectedCountry == 0 && selectedGenre == 0) {
+                if (keyword.isNotBlank() && selectedCountry == 0 && selectedGenre == 0
+                ) {
                     viewModel.searchFilm(newValue)
                 } else {
                     newFilteredMoviesViewModel.getFilteredMovies(
@@ -93,6 +96,7 @@ fun SearchScreen(navController: NavHostController, filtersViewModel: FilmFilters
                         yearTo = toYear,
                         keyword = keyword
                     )
+
                 }
             }
         )
