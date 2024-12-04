@@ -8,8 +8,11 @@ import com.example.androidfinalproject.presentation.profile.ProfileScreenViewMod
 
 @Composable
 fun RootNavGraph(navController: NavHostController, viewModel: ProfileScreenViewModel) {
-    NavHost(navController = navController, startDestination = Routes.Starting.route,
-        route = "root"){
+    NavHost(
+        navController = navController,
+        startDestination = Routes.Starting.route,
+        route = "root"
+    ) {
         startingGraph(navController)
         composable(route = Routes.BottomBar.route) {
             BottomBarNavigation(viewModel = viewModel)

@@ -7,6 +7,7 @@ import com.example.androidfinalproject.domain.model.ActorByFilm
 import com.example.androidfinalproject.domain.model.FilmSearch
 import com.example.androidfinalproject.domain.model.ImagesOfFilm
 import com.example.androidfinalproject.domain.model.SimilarFilmsResponse
+import com.example.androidfinalproject.presentation.search.FilmFiltersResponse
 import com.example.androidfinalproject.util.Constants.TOKEN
 import retrofit2.Response
 import retrofit2.http.GET
@@ -56,4 +57,23 @@ interface ApiInterface {
         @Query("keyword") keyword: String,
         @Header("X-API-KEY") apiKey: String = TOKEN
     ): Response<FilmSearch>
+    @GET("/api/v2.2/films/filters")
+    suspend fun getFilmFilters(
+        @Header("X-API-KEY") apiKey: String = TOKEN
+    ): Response<FilmFiltersResponse>
+    @GET("/api/v2.2/films")
+    suspend fun getFilteredMovies(
+        @Query("countries") country: Int,
+        @Query("genres") genre: Int,
+        @Query("order") order: String,
+        @Query("type") type: String,
+        @Query("ratingFrom") ratingFrom: Double,
+        @Query("ratingTo") ratingTo: Double,
+        @Query("yearFrom") yearFrom: Int,
+        @Query("yearTo") yearTo: Int,
+        @Query("keyword") keyword: String,
+        @Query("page") page: Int = 1,
+        @Header("X-API-KEY") apiKey: String = TOKEN
+    ): Response<MovieResponse>
+
 }

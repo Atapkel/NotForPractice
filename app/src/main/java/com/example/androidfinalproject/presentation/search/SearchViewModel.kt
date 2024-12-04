@@ -1,8 +1,5 @@
 package com.example.androidfinalproject.presentation.search
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidfinalproject.data.repository.Repository
@@ -16,7 +13,6 @@ class SearchViewModel : ViewModel() {
 
     private val _state = MutableStateFlow<SearchState>(SearchState.Initial)
     val state: StateFlow<SearchState> = _state
-
     fun searchFilm(keyword: String) {
         if (keyword.isBlank()) {
             _state.value = SearchState.Initial

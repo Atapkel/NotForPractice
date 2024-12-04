@@ -1,3 +1,6 @@
+import com.example.androidfinalproject.domain.model.Country
+import com.example.androidfinalproject.domain.model.Genre
+
 data class Movie(
     val kinopoiskId: Int = 1,
     val imdbId: String? = "",
@@ -18,13 +21,4 @@ data class Movie(
     val shortDescription: String = "",
     val editorAnnotation: String = "",
     val ratingAgeLimits: String = ""
-
-)
-
-data class Country(
-    val country: String
-)
-
-data class Genre(
-    val genre: String
 )
